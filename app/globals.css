@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF8F5;
+  --foreground: #141518;
+  /* User Reference Palette Tokens */
+  --color-warm-orange: #d97706;
+  --color-pale-cyan: #0284c7;
+  --color-sky-cyan: #0ea5e9;
+  --color-fresh-green: #059669;
+  --color-pure-white: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-warm-orange: var(--color-warm-orange);
+  --color-pale-cyan: var(--color-pale-cyan);
+  --color-sky-cyan: var(--color-sky-cyan);
+  --color-fresh-green: var(--color-fresh-green);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: #FAF8F5 !important;
+  color: #141518;
+  overflow-x: clip;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAF8F5 !important;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(217, 119, 6, 0.045) 0%, transparent 45%),
+    radial-gradient(circle at 82% 65%, rgba(14, 165, 233, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.035) 0%, transparent 45%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #141518;
+  min-height: 100vh;
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* User-Provided Dark Graphite Theme (#1D1D1E) */
+html.dark, html[data-theme="dark"] {
+  background-color: #1D1D1E !important;
+  color: #FFFFFF !important;
+}
+
+html.dark body, html[data-theme="dark"] body {
+  background-color: #1D1D1E !important;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(217, 119, 6, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 82% 65%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 45%) !important;
+  color: #FFFFFF !important;
+}
+
+/* Ensure smooth, ultra-crisp canvas rendering without jagged pixelation */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: auto;
+}
+
+@keyframes pulseGlowOrange {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(217, 119, 6, 0.3), 0 0 30px rgba(217, 119, 6, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(217, 119, 6, 0.6), 0 0 50px rgba(217, 119, 6, 0.3);
+  }
+}
+
+@keyframes pulseGlowBlue {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.3), 0 0 30px rgba(14, 165, 233, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(14, 165, 233, 0.6), 0 0 50px rgba(14, 165, 233, 0.3);
+  }
+}
+
+.glow-orange {
+  animation: pulseGlowOrange 2.5s infinite ease-in-out;
+}
+
+.glow-blue {
+  animation: pulseGlowBlue 2.5s infinite ease-in-out;
 }

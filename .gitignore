@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scratch and temporary scripts
+/scratch/
+
+# root recordings and heavy media exceeding GitHub limits
+/*.mp4
+public/hero-video-8k.mp4
+public/screen-recording.mp4
+public/test_*.mp4

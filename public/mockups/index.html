@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HVAC Visual Mockup Gallery — Color Schemes, Themes & Typography</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 9999px; }
+  </style>
+</head>
+<body class="bg-[#050608] text-zinc-100 min-h-screen antialiased p-4 sm:p-6 lg:p-8 font-sans custom-scroll">
+  
+  <!-- Header -->
+  <header class="max-w-7xl mx-auto mb-8 border-b border-white/[0.08] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.1] text-xs font-mono uppercase tracking-widest text-zinc-400 mb-2">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+        <span>Architectural HVAC Visual Design Suite</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+        Theme & Typography Mockups
+      </h1>
+      <p class="text-sm text-zinc-400 mt-2 max-w-2xl font-light">
+        Saved directly in your running project folder (<code class="bg-white/10 px-1.5 py-0.5 rounded text-zinc-300 font-mono text-xs">public/mockups/</code> & <code class="bg-white/10 px-1.5 py-0.5 rounded text-zinc-300 font-mono text-xs">mockups/</code>). Inspect smooth color schemes, typography pairings, and atmospheric lighting below.
+      </p>
+    </div>
+    
+    <div class="flex items-center gap-3">
+      <a href="/" class="px-4 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.12] text-xs font-mono uppercase tracking-wider text-zinc-300 transition-colors">
+        ← Back to Live Site
+      </a>
+      <span class="px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400 font-bold">
+        9 Ultra-Res Boards
+      </span>
+    </div>
+  </header>
+
+  <!-- Interactive Viewer -->
+  <main class="max-w-7xl mx-auto flex flex-col gap-8">
+    
+    <!-- Thumbnail Strip Selector -->
+    <div class="flex items-center gap-3 overflow-x-auto pb-3 custom-scroll" id="thumbStrip">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Active Mockup Big Showcase Display -->
+    <section class="bg-zinc-950/80 border border-white/[0.12] rounded-3xl p-6 shadow-2xl backdrop-blur-xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.08] pb-4 mb-6">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold block" id="activeCategory">THEME 01</span>
+          <h2 class="text-xl sm:text-2xl font-black uppercase text-white mt-0.5" id="activeTitle">Obsidian Noir</h2>
+          <p class="text-xs text-zinc-400 font-mono mt-1" id="activeDesc">Pure Void #000000 with radiant amber and glacier cyan</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a id="btnDownload" href="#" download class="px-4 py-2 rounded-xl bg-white text-black font-bold text-xs uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-lg">
+            Download PNG (1600x900)
+          </a>
+          <a id="btnOpenFull" href="#" target="_blank" class="px-4 py-2 rounded-xl bg-white/[0.08] hover:bg-white/[0.15] border border-white/[0.15] text-xs uppercase tracking-wider font-semibold text-white transition-all">
+            Open Full Screen ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Image Preview Container -->
+      <div class="relative w-full rounded-2xl overflow-hidden border border-white/[0.1] bg-black group">
+        <img id="mainMockupImg" src="/mockups/01_obsidian_noir_pure_black.png" alt="Active Mockup" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]">
+      </div>
+
+      <!-- Typography & Color Specs Bar for this theme -->
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-white/[0.08]" id="specsGrid">
+        <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+          <span class="text-[11px] font-mono text-zinc-500 uppercase block mb-1">Typography Pairing</span>
+          <span class="text-sm font-bold text-white block" id="specTypo">Inter / Geist Neo-Grotesk</span>
+          <span class="text-xs text-zinc-400 font-mono mt-0.5 block" id="specTypoRole">Swiss Minimalist Display & Monospace Metrics</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+          <span class="text-[11px] font-mono text-zinc-500 uppercase block mb-1">Atmosphere & Mood</span>
+          <span class="text-sm font-bold text-white block" id="specMood">Architectural Cinema</span>
+          <span class="text-xs text-zinc-400 font-mono mt-0.5 block" id="specMoodDesc">Infinite OLED contrast with soft glowing air streamlines</span>
+        </div>
+        <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+          <span class="text-[11px] font-mono text-zinc-500 uppercase block mb-1">Palette Keynotes</span>
+          <span class="text-sm font-bold text-amber-400 block" id="specPalette">#000000 • #F59E0B • #38BDF8</span>
+          <span class="text-xs text-zinc-400 font-mono mt-0.5 block" id="specPaletteRole">Radiant Heat & Arctic Chilled Air</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complete Gallery Grid (All 9 Mockups) -->
+    <section class="mt-8">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h3 class="text-xl font-bold uppercase text-white tracking-wide">All 9 Mockup Boards</h3>
+          <p class="text-xs text-zinc-400 font-mono mt-0.5">Click any board to focus in the high-resolution viewer above</p>
+        </div>
+        <span class="text-xs font-mono text-zinc-500">Folder: /public/mockups/</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="allBoardsGrid">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const MOCKUPS = [
+      {
+        id: "01",
+        title: "01 • Obsidian Noir",
+        filename: "01_obsidian_noir_pure_black.png",
+        category: "THEME 01 — REFERENCE MOVIE",
+        desc: "Pure Void #000000 with radiant amber and glacier cyan",
+        typo: "Inter / Geist Neo-Grotesk Display",
+        typoRole: "Swiss precision display + tabular monospace numbers",
+        mood: "Architectural Dark Cinema",
+        moodDesc: "Infinite OLED depth; the building cutaway floats without bezel friction",
+        palette: "#000000 • #F59E0B • #38BDF8 • #FFFFFF",
+        paletteRole: "Radiant Floor Hearth & Arctic Chilled Induction"
+      },
+      {
+        id: "02",
+        title: "02 • Architectural Slate",
+        filename: "02_architectural_slate_blueprint.png",
+        category: "THEME 02 — SCANDINAVIAN STUDIO",
+        desc: "Graphite Canvas #080C14 with technical blueprint cyan & cadet steel",
+        typo: "DIN 1451 / Space Grotesk CAD",
+        typoRole: "Architectural blueprint dimension lettering & clean lines",
+        mood: "CAD Engineering Studio",
+        moodDesc: "Drafting grid layout with static pressure & acoustic criteria chips",
+        palette: "#080C14 • #00E5FF • #1E293B • #3B82F6",
+        paletteRole: "Aerodynamic static pressure & duct schematics"
+      },
+      {
+        id: "03",
+        title: "03 • Thermal Dual-Zone",
+        filename: "03_thermal_dual_zone_contrast.png",
+        category: "THEME 03 — CONTRAST SPLIT",
+        desc: "Volcanic Basalt #040406 with ember flare & sub-zero mountain snow",
+        typo: "Cinzel / Playfair Modern Editorial",
+        typoRole: "High-contrast architectural luxury typography",
+        mood: "Extreme Thermodynamic Split",
+        moodDesc: "Sub-zero -4°F exterior envelope vs 104°F radiant hydronic loop",
+        palette: "#040406 • #EA580C • #06B6D4 • #FBBF24",
+        paletteRole: "Ember Hearth & Glacial Alpine Cold"
+      },
+      {
+        id: "04",
+        title: "04 • Biophilic Clean Air",
+        filename: "04_biophilic_clean_air_wellness.png",
+        category: "THEME 04 — PASSIVE HOUSE & IAQ",
+        desc: "Forest Shadow #020905 with oxygen emerald & glacier mint",
+        typo: "Plus Jakarta Sans / Outfit",
+        typoRole: "Modern organic sans-serif with whisper-quiet cadence",
+        mood: "Passive House Wellness Luxury",
+        moodDesc: "Hospital-grade MERV 16 filtration and continuous fresh air HRV",
+        palette: "#020905 • #00E676 • #69F0AE • #ECFDF5",
+        paletteRole: "Oxygen Purity & Silent Laminar Air Exchange"
+      },
+      {
+        id: "05",
+        title: "05 • Titanium Monolith",
+        filename: "05_titanium_monolith_industrial.png",
+        category: "THEME 05 — HIGH-TECH MACHINERY",
+        desc: "Matte Titanium #0C0D12 with ultraviolet LED and precision inverter telemetry",
+        typo: "JetBrains Mono / Chakra Industrial",
+        typoRole: "Monospace telemetry readouts & variable speed gauges",
+        mood: "Aerospace Industrial Engineering",
+        moodDesc: "Twin-rotary inverter compressor modulation & 22.5 SEER2 diagnostics",
+        palette: "#0C0D12 • #6366F1 • #38BDF8 • #334155",
+        paletteRole: "Micro-inverter diagnostics & ultraviolet status"
+      },
+      {
+        id: "06",
+        title: "06 • Champagne Luxury",
+        filename: "06_champagne_luxury_aspen_chalet.png",
+        category: "THEME 06 — ASPEN CHALET",
+        desc: "Smoked Oak #0B0907 with bronze gold alabaster & cashmere warmth",
+        typo: "Italiana / Tenor Serif Luxury",
+        typoRole: "Architectural Digest editorial typography",
+        mood: "Understated Quiet Luxury",
+        moodDesc: "Aspen winter retreat; copper hydronics & cashmere acoustics",
+        palette: "#0B0907 • #D97706 • #D4B996 • #F5F5F0",
+        paletteRole: "Warm Alabaster & Bronze Radiance"
+      },
+      {
+        id: "07",
+        title: "07 • Arctic Polar Cryo",
+        filename: "07_arctic_polar_cryo_climate.png",
+        category: "THEME 07 — CRYO CLIMATE",
+        desc: "Polar Midnight #030712 with electric chilled-water cyan & silver mist",
+        typo: "Cabinet Grotesk / General Sans",
+        typoRole: "Ultra-clean geometric sans-serif",
+        mood: "High-Capacity Cryo Hydronics",
+        moodDesc: "Chilled water plant, sub-dewpoint control, and mountain purity",
+        palette: "#030712 • #0EA5E9 • #38BDF8 • #CBD5E1",
+        paletteRole: "Chilled Water Supply & Condensation Lock"
+      },
+      {
+        id: "08",
+        title: "08 • Design System Specs",
+        filename: "08_design_system_typography_colors.png",
+        category: "SPECIFICATION SHEET",
+        desc: "Complete comparative typography scale hierarchy & thermal color tokens",
+        typo: "Complete Hierarchy Matrix (Display, H1, H2, Mono, Body)",
+        typoRole: "Relative scales, line-heights, and letter-spacing specifications",
+        mood: "Engineering Design System",
+        moodDesc: "Full design token rules for developers and designers",
+        palette: "Thermal Spectrum: #F59E0B / #38BDF8 / #10B981 / #00E5FF",
+        paletteRole: "Core CSS Design Tokens"
+      },
+      {
+        id: "09",
+        title: "09 • Master Comparison Matrix",
+        filename: "09_master_themes_comparison_matrix.png",
+        category: "GRAND COMPARISON MATRIX",
+        desc: "Side-by-side comparative dashboard displaying all themes simultaneously",
+        typo: "Multi-Theme Comparative Typography",
+        typoRole: "Side-by-side evaluation of all font pairings",
+        mood: "Grand Multi-Theme Matrix",
+        moodDesc: "Instant visual contrast comparison across all 6 art directions",
+        palette: "Complete Spectrum of all 7 themes",
+        paletteRole: "Executive Decision Matrix"
+      }
+    ];
+
+    let activeIdx = 0;
+
+    function renderThumbStrip() {
+      const container = document.getElementById("thumbStrip");
+      container.innerHTML = MOCKUPS.map((m, idx) => `
+        <button onclick="selectMockup(${idx})" class="group flex items-center gap-3 px-4 py-2.5 rounded-2xl border transition-all shrink-0 cursor-pointer ${
+          idx === activeIdx 
+            ? 'bg-white text-black font-bold border-white shadow-lg shadow-white/10' 
+            : 'bg-white/[0.03] text-zinc-400 hover:text-white hover:bg-white/[0.08] border-white/[0.08]'
+        }">
+          <span class="w-2.5 h-2.5 rounded-full ${idx === 0 ? 'bg-amber-400' : idx === 1 ? 'bg-sky-400' : idx === 2 ? 'bg-orange-500' : idx === 3 ? 'bg-emerald-400' : idx === 4 ? 'bg-indigo-400' : idx === 5 ? 'bg-amber-600' : idx === 6 ? 'bg-cyan-400' : 'bg-purple-400'}"></span>
+          <span class="text-xs font-mono tracking-wider uppercase whitespace-nowrap">${m.title}</span>
+        </button>
+      `).join("");
+    }
+
+    function renderAllBoardsGrid() {
+      const grid = document.getElementById("allBoardsGrid");
+      grid.innerHTML = MOCKUPS.map((m, idx) => `
+        <div onclick="selectMockup(${idx}); window.scrollTo({top: 150, behavior: 'smooth'});" class="group bg-zinc-950/60 border border-white/[0.08] hover:border-white/30 rounded-2xl p-4 transition-all duration-300 cursor-pointer hover:shadow-2xl hover:-translate-y-1">
+          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/[0.06]">
+            <img src="/mockups/${m.filename}" alt="${m.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          </div>
+          <span class="text-[10px] font-mono uppercase text-amber-400 font-bold block">${m.category}</span>
+          <h4 class="text-sm font-bold text-white uppercase mt-0.5">${m.title}</h4>
+          <p class="text-xs text-zinc-400 font-mono mt-1 truncate">${m.desc}</p>
+        </div>
+      `).join("");
+    }
+
+    function selectMockup(idx) {
+      activeIdx = idx;
+      const m = MOCKUPS[idx];
+      renderThumbStrip();
+
+      document.getElementById("activeCategory").textContent = m.category;
+      document.getElementById("activeTitle").textContent = m.title;
+      document.getElementById("activeDesc").textContent = m.desc;
+
+      const imgPath = "/mockups/" + m.filename;
+      document.getElementById("mainMockupImg").src = imgPath;
+      document.getElementById("btnDownload").href = imgPath;
+      document.getElementById("btnDownload").download = m.filename;
+      document.getElementById("btnOpenFull").href = imgPath;
+
+      document.getElementById("specTypo").textContent = m.typo;
+      document.getElementById("specTypoRole").textContent = m.typoRole;
+      document.getElementById("specMood").textContent = m.mood;
+      document.getElementById("specMoodDesc").textContent = m.moodDesc;
+      document.getElementById("specPalette").textContent = m.palette;
+      document.getElementById("specPaletteRole").textContent = m.paletteRole;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderThumbStrip();
+      renderAllBoardsGrid();
+      selectMockup(0);
+    });
+  </script>
+</body>
+</html>
+
