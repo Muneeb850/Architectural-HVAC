@@ -116,7 +116,9 @@ export default function SeasonTransformationSection() {
 
           {/* Clipped Top Layer: Winter / Alpine Morph with Radiant Floor */}
           <div
-            className="absolute inset-0 h-full overflow-hidden transition-all duration-75"
+            className={`absolute inset-0 h-full overflow-hidden will-change-[width] ${
+              isDragging ? "transition-none" : "transition-[width] duration-500 ease-out"
+            }`}
             style={{ width: `${sliderPos}%` }}
           >
             <div style={{ width: `${stageWidth}px`, height: "100%" }} className="relative h-full">
@@ -131,7 +133,9 @@ export default function SeasonTransformationSection() {
 
           {/* Draggable Divider Handle */}
           <div
-            className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-30 shadow-[0_0_20px_rgba(255,255,255,0.8)]"
+            className={`absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-30 shadow-[0_0_20px_rgba(255,255,255,0.8)] will-change-[left] ${
+              isDragging ? "transition-none" : "transition-[left] duration-500 ease-out"
+            }`}
             style={{ left: `${sliderPos}%` }}
           >
             {/* Center Circular Grabber */}

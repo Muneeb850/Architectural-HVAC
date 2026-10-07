@@ -60,8 +60,8 @@ export default function CinematicScrollEngine() {
   const pinContainerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const percentTextRef = useRef<HTMLSpanElement>(null);
 
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [activeChapterIndex, setActiveChapterIndex] = useState<number>(0);
   const [isPlayingVideo, setIsPlayingVideo] = useState<boolean>(false);
   const [, setLoadedFramesCount] = useState<number>(0);
@@ -73,7 +73,7 @@ export default function CinematicScrollEngine() {
   const renderFrame = useCallback((frameIndex: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
     if (!ctx) return;
 
     // Check requested frame first
@@ -81,21 +81,17 @@ export default function CinematicScrollEngine() {
 
     // If exact frame is not yet loaded, find closest loaded frame in memory immediately
     if (!img || !img.complete || img.naturalWidth === 0) {
-      let bestDist = Infinity;
-      let bestFrame = -1;
-      for (let i = 0; i < TOTAL_FRAMES; i++) {
-        const candidate = globalFrameCache[i];
-        if (candidate && candidate.complete && candidate.naturalWidth > 0) {
-          const dist = Math.abs(i - frameIndex);
-          if (dist < bestDist) {
-            bestDist = dist;
-            bestFrame = i;
-            if (dist === 0) break;
-          }
+      for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+        const left = frameIndex - offset;
+        const right = frameIndex + offset;
+        if (left >= 0 && globalFrameCache[left]?.complete && globalFrameCache[left]?.naturalWidth) {
+          img = globalFrameCache[left];
+          break;
         }
-      }
-      if (bestFrame !== -1) {
-        img = globalFrameCache[bestFrame];
+        if (right < TOTAL_FRAMES && globalFrameCache[right]?.complete && globalFrameCache[right]?.naturalWidth) {
+          img = globalFrameCache[right];
+          break;
+        }
       }
     }
 
@@ -127,26 +123,24 @@ export default function CinematicScrollEngine() {
       renderY = 0;
     }
 
-    ctx.clearRect(0, 0, cw, ch);
     ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
-    ctx.filter = "contrast(1.05) brightness(1.02) saturate(1.03)";
+    ctx.imageSmoothingQuality = "medium";
     ctx.drawImage(img, renderX, renderY, renderW, renderH);
 
     currentFrameRef.current = frameIndex;
   }, []);
 
-  // Resize canvas according to window devicePixelRatio
+  // Resize canvas according to window devicePixelRatio (capped to native 2560x1440 for max performance)
   const handleResize = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
+    canvas.width = Math.min(Math.round(width * dpr), 2560);
+    canvas.height = Math.min(Math.round(height * dpr), 1440);
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
 
@@ -211,11 +205,24 @@ export default function CinematicScrollEngine() {
     };
   }, [handleResize, renderFrame]);
 
-  // Setup GSAP ScrollTrigger PINNING with snappy 1500px scroll travel
+  // Setup GSAP ScrollTrigger PINNING with silky 1:1 scrub tracking (zero lag with Lenis)
   useEffect(() => {
     if (!sectionRef.current || !pinContainerRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
+
+    let rafId: number | null = null;
+    let targetFrame = 0;
+
+    const scheduleFrameRender = (idx: number) => {
+      targetFrame = idx;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          rafId = null;
+          renderFrame(targetFrame);
+        });
+      }
+    };
 
     const st = ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -224,10 +231,9 @@ export default function CinematicScrollEngine() {
       pin: pinContainerRef.current,
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 0.15, // Immediate, responsive scrub tracking
+      scrub: 0.05, // Instant 1:1 response with Lenis smooth scrolling (no double-lag)
       onUpdate: (self) => {
         const progress = self.progress;
-        setScrollProgress(progress);
 
         // Map scroll progress to 0..191 frame index
         const frameIndex = Math.min(
@@ -243,12 +249,17 @@ export default function CinematicScrollEngine() {
           }
         }
 
-        renderFrame(frameIndex);
+        scheduleFrameRender(frameIndex);
 
-        // Update active chapter index
+        // Update HUD percentage readout directly (zero React overhead)
+        if (percentTextRef.current) {
+          percentTextRef.current.textContent = `${Math.round(progress * 100)}%`;
+        }
+
+        // Update active chapter index only when crossing chapter thresholds
         const chIdx = CHAPTERS.findIndex((c) => progress >= c.start && progress <= c.end);
         if (chIdx !== -1) {
-          setActiveChapterIndex(chIdx);
+          setActiveChapterIndex((prev) => (prev !== chIdx ? chIdx : prev));
         }
       },
     });
@@ -256,6 +267,7 @@ export default function CinematicScrollEngine() {
     scrollTriggerInstanceRef.current = st;
 
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
       st.kill();
     };
   }, [renderFrame]);
@@ -283,8 +295,6 @@ export default function CinematicScrollEngine() {
     }
   };
 
-  const p = scrollProgress;
-
   return (
     <div ref={sectionRef} id="hero" className="relative w-full bg-[#040507] text-white">
       {/* PINNED CONTAINER (Locked in place by GSAP ScrollTrigger) */}
@@ -303,10 +313,11 @@ export default function CinematicScrollEngine() {
           />
         </div>
 
-        {/* 2.5K QHD Canvas Frame Scrubber (Instant 60fps frame scrubbing) */}
+        {/* 2.5K QHD Canvas Frame Scrubber (Instant GPU-composited frame scrubbing) */}
         <canvas
           ref={canvasRef}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+          style={{ filter: "contrast(1.05) brightness(1.02) saturate(1.03)" }}
+          className={`absolute inset-0 w-full h-full object-cover will-change-transform transition-opacity duration-300 ${
             isPlayingVideo ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
         />
@@ -330,23 +341,23 @@ export default function CinematicScrollEngine() {
 
         {/* Ambient Warm & Cool Spotlights (Obsidian Noir Palette) */}
         <div
-          className="pointer-events-none absolute -top-40 -left-40 w-[650px] h-[650px] rounded-full blur-[160px] transition-opacity duration-700"
+          className="pointer-events-none absolute -top-40 -left-40 w-[650px] h-[650px] rounded-full blur-[160px] transition-all duration-700"
           style={{
             background:
-              p > 0.65
+              activeChapterIndex >= 4
                 ? "radial-gradient(circle, rgba(245, 158, 11, 0.38) 0%, transparent 70%)"
                 : "radial-gradient(circle, rgba(234, 88, 12, 0.3) 0%, transparent 70%)",
-            opacity: p < 0.6 ? 0.35 : 0.65,
+            opacity: activeChapterIndex < 4 ? 0.35 : 0.65,
           }}
         />
         <div
-          className="pointer-events-none absolute -top-40 -right-40 w-[650px] h-[650px] rounded-full blur-[160px] transition-opacity duration-700"
+          className="pointer-events-none absolute -top-40 -right-40 w-[650px] h-[650px] rounded-full blur-[160px] transition-all duration-700"
           style={{
             background:
-              p > 0.65
+              activeChapterIndex >= 4
                 ? "radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, transparent 70%)"
                 : "radial-gradient(circle, rgba(14, 165, 233, 0.35) 0%, transparent 70%)",
-            opacity: p < 0.6 ? 0.45 : 0.25,
+            opacity: activeChapterIndex < 4 ? 0.45 : 0.25,
           }}
         />
         <div
@@ -357,15 +368,15 @@ export default function CinematicScrollEngine() {
         />
 
         {/* ========================================================
-            NARRATIVE OVERLAYS (SYNCHRONIZED BY SCROLL PROGRESS)
+            NARRATIVE OVERLAYS (SYNCHRONIZED BY CHAPTER THRESHOLDS)
         ======================================================== */}
 
         {/* --------------------------------------------------------
-            ACT 01 (0.00 - 0.16): HERO OPENING
+            ACT 01: HERO OPENING
         -------------------------------------------------------- */}
         <div
           className={`absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 pointer-events-none transition-all duration-500 ${
-            p < 0.16
+            activeChapterIndex === 0
               ? "opacity-100 translate-y-0"
               : "opacity-0 -translate-y-12 pointer-events-none"
           }`}
@@ -429,13 +440,13 @@ export default function CinematicScrollEngine() {
         </div>
 
         {/* --------------------------------------------------------
-            ACT 02 (0.16 - 0.33): SECTION 02 — THE STRUCTURAL CUTAWAY
+            ACT 02: SECTION 02 — THE STRUCTURAL CUTAWAY
         -------------------------------------------------------- */}
         <div
           className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
-            p >= 0.16 && p < 0.33
+            activeChapterIndex === 1
               ? "opacity-100 translate-x-0"
-              : p < 0.16
+              : activeChapterIndex < 1
               ? "opacity-0 translate-x-12"
               : "opacity-0 -translate-x-12"
           }`}
@@ -461,13 +472,13 @@ export default function CinematicScrollEngine() {
         </div>
 
         {/* --------------------------------------------------------
-            ACT 03 (0.33 - 0.50): SECTION 03 — THE AIRFLOW STORY
+            ACT 03: SECTION 03 — THE AIRFLOW STORY
         -------------------------------------------------------- */}
         <div
           className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
-            p >= 0.33 && p < 0.50
+            activeChapterIndex === 2
               ? "opacity-100 translate-y-0"
-              : p < 0.33
+              : activeChapterIndex < 2
               ? "opacity-0 translate-y-12"
               : "opacity-0 -translate-y-12"
           }`}
@@ -493,13 +504,13 @@ export default function CinematicScrollEngine() {
         </div>
 
         {/* --------------------------------------------------------
-            ACT 04 (0.50 - 0.67): SECTION 04 — THE HIDDEN MACHINE
+            ACT 04: SECTION 04 — THE HIDDEN MACHINE
         -------------------------------------------------------- */}
         <div
           className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
-            p >= 0.50 && p < 0.67
+            activeChapterIndex === 3
               ? "opacity-100 translate-y-0"
-              : p < 0.50
+              : activeChapterIndex < 3
               ? "opacity-0 translate-y-12"
               : "opacity-0 -translate-y-12"
           }`}
@@ -525,13 +536,13 @@ export default function CinematicScrollEngine() {
         </div>
 
         {/* --------------------------------------------------------
-            ACT 05 (0.67 - 0.84): SECTION 05 — VILLA MORPH & SEASONS
+            ACT 05: SECTION 05 — VILLA MORPH & SEASONS
         -------------------------------------------------------- */}
         <div
           className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
-            p >= 0.67 && p < 0.84
+            activeChapterIndex === 4
               ? "opacity-100 translate-x-0"
-              : p < 0.67
+              : activeChapterIndex < 4
               ? "opacity-0 translate-x-12"
               : "opacity-0 -translate-x-12"
           }`}
@@ -557,11 +568,11 @@ export default function CinematicScrollEngine() {
         </div>
 
         {/* --------------------------------------------------------
-            ACT 06 (0.84 - 1.00): SECTION 09 — THE FINAL REVEAL
+            ACT 06: SECTION 09 — THE FINAL REVEAL
         -------------------------------------------------------- */}
         <div
           className={`absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 pointer-events-none transition-all duration-500 ${
-            p >= 0.84
+            activeChapterIndex === 5
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-12"
           }`}
@@ -616,7 +627,7 @@ export default function CinematicScrollEngine() {
             <span className="text-zinc-600 hidden sm:inline">•</span>
             <span className="text-emerald-400 font-semibold hidden md:inline">2.5K QHD</span>
             <span className="text-zinc-600 hidden sm:inline">•</span>
-            <span className="text-zinc-400 hidden sm:inline">{Math.round(p * 100)}%</span>
+            <span ref={percentTextRef} className="text-zinc-400 hidden sm:inline">0%</span>
           </div>
 
           {/* Right: Chapter Title indicator */}

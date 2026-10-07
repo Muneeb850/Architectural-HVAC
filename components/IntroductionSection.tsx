@@ -197,10 +197,7 @@ export default function IntroductionSection() {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius * p.z, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${p.alpha * p.z})`;
-        ctx.shadowBlur = 10 * p.z;
-        ctx.shadowColor = `${p.color}0.8)`;
         ctx.fill();
-        ctx.shadowBlur = 0;
       });
 
       animId = requestAnimationFrame(render);
@@ -227,7 +224,7 @@ export default function IntroductionSection() {
       pin: pinContainerRef.current,
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 0.15, // Butter-smooth responsive scroll scrub
+      scrub: 0.05, // Instant 1:1 scrub response synchronized with Lenis
       onUpdate: (self) => {
         const progress = self.progress; // 0 to 1
         const virtualIdx = progress * (CARDS.length - 1); // 0 to 5
