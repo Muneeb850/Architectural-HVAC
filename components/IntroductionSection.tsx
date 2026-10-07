@@ -138,6 +138,7 @@ export default function IntroductionSection() {
   const [continuousIndex, setContinuousIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
+  const [screenWidth, setScreenWidth] = useState<number>(typeof window !== "undefined" ? window.innerWidth : 1200);
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const pinContainerRef = useRef<HTMLDivElement>(null);
@@ -154,11 +155,13 @@ export default function IntroductionSection() {
     let animId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    setScreenWidth(window.innerWidth);
 
     const handleResize = () => {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      setScreenWidth(window.innerWidth);
     };
     window.addEventListener("resize", handleResize);
 
@@ -295,14 +298,14 @@ export default function IntroductionSection() {
 
         {/* Header (Top) */}
         <div className="relative z-10 text-center max-w-3xl mx-auto pt-2 sm:pt-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] text-xs font-mono uppercase tracking-widest text-[#141518] dark:text-zinc-200 mb-3 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#141518] dark:text-zinc-200 mb-2 sm:mb-3 backdrop-blur-md">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-            <span>Introduction — Spatial Architecture</span>
-            <span className="text-zinc-400 dark:text-zinc-500">|</span>
-            <span className="text-sky-600 dark:text-sky-400 font-semibold">Scroll Down To Advance</span>
+            <span>Spatial Architecture</span>
+            <span className="text-zinc-400 dark:text-zinc-500 hidden sm:inline">|</span>
+            <span className="text-sky-600 dark:text-sky-400 font-semibold hidden sm:inline">Scroll Down To Advance</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-[#141518] dark:text-white leading-tight">
+          <h2 className="text-xl sm:text-3xl lg:text-5xl font-black uppercase tracking-tight text-[#141518] dark:text-white leading-tight">
             Explore The Spatial{" "}
             <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-sky-600 bg-clip-text text-transparent">
               Climate Universe.
@@ -331,8 +334,14 @@ export default function IntroductionSection() {
 
             const isCenter = Math.abs(diff) < 0.5;
 
+            // Responsive horizontal spacing on mobile vs desktop
+            const cardSpacing =
+              screenWidth < 640
+                ? Math.min(screenWidth * 0.78, 280)
+                : 430;
+
             // 3D Spatial Position Math (Smooth real-time curve based on scroll position)
-            const tx = diff * 430;
+            const tx = diff * cardSpacing;
             const tz = -Math.abs(diff) * 230;
             const ry = -Math.max(Math.min(diff * 30, 60), -60);
             const scale = Math.max(0.68, 1 - Math.abs(diff) * 0.14);
@@ -355,7 +364,7 @@ export default function IntroductionSection() {
                 onClick={() => scrollToCard(i)}
                 onMouseMove={isCenter ? handleMouseMove : undefined}
                 onMouseLeave={isCenter ? handleMouseLeave : undefined}
-                className="absolute w-[92%] max-w-[420px] sm:max-w-[580px] md:max-w-[700px] lg:max-w-[780px] aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden will-change-transform cursor-pointer select-none"
+                className="absolute w-[94%] max-w-[370px] sm:max-w-[580px] md:max-w-[700px] lg:max-w-[780px] aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] rounded-3xl overflow-hidden will-change-transform cursor-pointer select-none"
                 style={{
                   transform: `translate3d(${tx}px, 0px, ${finalTz}px) rotateY(${finalRy}deg) rotateX(${rx}deg) scale(${scale})`,
                   transformStyle: "preserve-3d",
@@ -404,11 +413,11 @@ export default function IntroductionSection() {
                 )}
 
                 {/* Card Content Layout */}
-                <div className="relative z-20 h-full p-5 sm:p-7 md:p-9 flex flex-col justify-between">
+                <div className="relative z-20 h-full p-4 sm:p-7 md:p-9 flex flex-col justify-between">
                   {/* Card Top Header */}
                   <div className="flex items-center justify-between">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/75 border border-white/20 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-amber-300 font-bold backdrop-blur-md shadow-md">
-                      <Icon className="w-3.5 h-3.5 text-amber-400" />
+                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-black/75 border border-white/20 text-[9px] sm:text-xs font-mono uppercase tracking-widest text-amber-300 font-bold backdrop-blur-md shadow-md">
+                      <Icon className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-400" />
                       <span>{card.badge}</span>
                     </div>
 
@@ -416,34 +425,34 @@ export default function IntroductionSection() {
                       <span className="text-[10px] sm:text-xs font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
                         {card.category}
                       </span>
-                      <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-xs font-mono font-bold text-white backdrop-blur-md">
+                      <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[10px] sm:text-xs font-mono font-bold text-white backdrop-blur-md">
                         0{card.id}
                       </span>
                     </div>
                   </div>
 
                   {/* Card Center Display Typography */}
-                  <div className="my-auto py-2">
-                    <h3 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+                  <div className="my-auto py-1 sm:py-2">
+                    <h3 className="text-xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
                       {card.title}
                     </h3>
-                    <p className="mt-1 text-sm sm:text-lg font-bold bg-gradient-to-r from-amber-300 via-orange-300 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+                    <p className="mt-0.5 sm:mt-1 text-xs sm:text-lg font-bold bg-gradient-to-r from-amber-300 via-orange-300 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
                       {card.subtitle}
                     </p>
-                    <p className="mt-2.5 text-xs sm:text-sm text-zinc-200 line-clamp-3 sm:line-clamp-2 md:line-clamp-none max-w-xl font-medium leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                    <p className="mt-1.5 sm:mt-2.5 text-[11px] sm:text-sm text-zinc-200 line-clamp-2 sm:line-clamp-3 md:line-clamp-none max-w-xl font-medium leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
                       {card.description}
                     </p>
                   </div>
 
                   {/* Card Bottom Telemetry Bar */}
-                  <div className="pt-3 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-4 sm:gap-6 font-mono text-xs">
+                  <div className="pt-2 sm:pt-3 border-t border-white/15 flex items-center justify-between gap-2 sm:gap-3">
+                    <div className="flex items-center gap-3 sm:gap-6 font-mono text-xs">
                       {card.stats.map((s, sIdx) => (
                         <div key={sIdx} className="flex flex-col">
-                          <span className="text-[9px] sm:text-[10px] text-zinc-400 uppercase tracking-wider">
+                          <span className="text-[8px] sm:text-[10px] text-zinc-400 uppercase tracking-wider">
                             {s.label}
                           </span>
-                          <span className="font-bold text-white text-xs sm:text-sm sm:text-base">
+                          <span className="font-bold text-white text-[11px] sm:text-sm sm:text-base">
                             {s.value}
                           </span>
                         </div>
@@ -454,13 +463,13 @@ export default function IntroductionSection() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const el = document.getElementById("engineering");
+                          const el = document.getElementById("invisible-architecture");
                           if (el) el.scrollIntoView({ behavior: "smooth" });
                         }}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-black text-[11px] font-bold uppercase tracking-wider hover:bg-zinc-200 transition-colors cursor-pointer shadow-md"
+                        className="inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white text-black text-[10px] sm:text-[11px] font-bold uppercase tracking-wider hover:bg-zinc-200 transition-colors cursor-pointer shadow-md shrink-0"
                       >
                         <span>Inspect</span>
-                        <ArrowRight className="w-3 h-3" />
+                        <ArrowRight className="w-2.5 sm:w-3 h-2.5 sm:h-3" />
                       </button>
                     )}
                   </div>

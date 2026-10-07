@@ -100,7 +100,7 @@ export default function FloatingReviewsSection() {
   return (
     <section
       id="reviews"
-      className={`relative w-full py-28 sm:py-36 overflow-hidden transition-colors duration-500 border-t ${
+      className={`relative w-full py-20 sm:py-36 overflow-hidden transition-colors duration-500 border-t ${
         isDark
           ? "bg-[#1D1D1E] text-white border-white/[0.08]"
           : "bg-[#FAF8F5] text-[#141518] border-black/[0.06]"
@@ -115,7 +115,7 @@ export default function FloatingReviewsSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-18">
+        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-18">
           <div
             className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-5 backdrop-blur-md transition-colors ${
               isDark
@@ -139,7 +139,7 @@ export default function FloatingReviewsSection() {
           </h2>
 
           <p
-            className={`mt-4 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto transition-colors ${
+            className={`mt-4 text-sm sm:text-lg font-light leading-relaxed max-w-2xl mx-auto transition-colors ${
               isDark ? "text-zinc-400" : "text-zinc-600"
             }`}
           >
@@ -149,7 +149,7 @@ export default function FloatingReviewsSection() {
 
           {/* Interactive Filter Pills */}
           <div
-            className={`mt-8 inline-flex items-center gap-1.5 p-1 rounded-full backdrop-blur-md transition-colors ${
+            className={`mt-6 sm:mt-8 inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl sm:rounded-full backdrop-blur-md transition-colors max-w-full ${
               isDark ? "bg-white/[0.04] border border-white/[0.08]" : "bg-black/[0.04] border border-black/[0.08]"
             }`}
           >
@@ -164,7 +164,7 @@ export default function FloatingReviewsSection() {
                 <button
                   key={tab.id}
                   onClick={() => setFilter(tab.id as typeof filter)}
-                  className={`px-3.5 sm:px-5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                  className={`px-3 sm:px-5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                     isActive
                       ? isDark
                         ? "bg-white text-black font-bold shadow-md"
@@ -182,11 +182,11 @@ export default function FloatingReviewsSection() {
         </div>
 
         {/* Floating Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {filteredReviews.map((rev) => (
             <div
               key={rev.id}
-              className={`group relative p-7 sm:p-8 rounded-3xl border transition-all duration-500 flex flex-col justify-between hover:-translate-y-1.5 ${
+              className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-500 flex flex-col justify-between hover:-translate-y-1.5 ${
                 isDark
                   ? "bg-[#252528]/80 border-white/[0.1] hover:border-white/[0.25] hover:bg-[#28282C] shadow-2xl shadow-black/40"
                   : "bg-white/90 border-black/[0.08] hover:border-black/[0.18] hover:bg-white shadow-xl shadow-black/[0.04]"

@@ -58,10 +58,10 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Hero Header */}
-      <section className="relative pt-36 sm:pt-44 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="relative pt-28 sm:pt-44 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="max-w-3xl">
           <div
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-6 backdrop-blur-md transition-colors ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-5 sm:mb-6 backdrop-blur-md transition-colors ${
               isDark
                 ? "bg-white/[0.05] border border-white/[0.12] text-zinc-300"
                 : "bg-black/[0.04] border border-black/[0.08] text-[#141518]"
@@ -72,7 +72,7 @@ export default function ContactPage() {
           </div>
 
           <h1
-            className={`text-4xl sm:text-6xl font-black uppercase tracking-tight leading-[1.08] transition-colors ${
+            className={`text-3xl sm:text-6xl font-black uppercase tracking-tight leading-[1.08] transition-colors ${
               isDark ? "text-white" : "text-[#141518]"
             }`}
           >
@@ -83,7 +83,7 @@ export default function ContactPage() {
           </h1>
 
           <p
-            className={`mt-5 text-base sm:text-lg font-light leading-relaxed max-w-2xl transition-colors ${
+            className={`mt-4 sm:mt-5 text-sm sm:text-lg font-light leading-relaxed max-w-2xl transition-colors ${
               isDark ? "text-zinc-400" : "text-zinc-600"
             }`}
           >
@@ -94,12 +94,12 @@ export default function ContactPage() {
       </section>
 
       {/* Main Content Grid: Simple Form & Contact Information */}
-      <section className="relative pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <section className="relative pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           {/* Simple Form (Left 7 Cols) */}
           <div className="lg:col-span-7">
             <div
-              className={`p-7 sm:p-10 rounded-3xl border transition-all duration-300 shadow-xl ${
+              className={`p-5 sm:p-10 rounded-2xl sm:rounded-3xl border transition-all duration-300 shadow-xl ${
                 isDark
                   ? "bg-[#252528]/80 border-white/[0.1]"
                   : "bg-white border-black/[0.08]"
@@ -270,7 +270,7 @@ export default function ContactPage() {
           {/* Direct Studio Details (Right 5 Cols) */}
           <div className="lg:col-span-5 space-y-6">
             <div
-              className={`p-7 sm:p-8 rounded-3xl border transition-all duration-300 shadow-xl ${
+              className={`p-5 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-300 shadow-xl ${
                 isDark
                   ? "bg-[#252528]/80 border-white/[0.1]"
                   : "bg-white border-black/[0.08]"
@@ -333,7 +333,7 @@ export default function ContactPage() {
 
             {/* Quick Assurance Box */}
             <div
-              className={`p-6 rounded-3xl border transition-all duration-300 ${
+              className={`p-5 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all duration-300 ${
                 isDark
                   ? "bg-white/[0.02] border-white/[0.06] text-zinc-400"
                   : "bg-black/[0.02] border-black/[0.06] text-zinc-600"

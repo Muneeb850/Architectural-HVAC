@@ -118,10 +118,10 @@ export default function ArchitecturePage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-36 sm:pt-44 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="relative pt-28 sm:pt-44 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="max-w-4xl">
           <div
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-6 backdrop-blur-md transition-colors ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-5 sm:mb-6 backdrop-blur-md transition-colors ${
               isDark
                 ? "bg-white/[0.05] border border-white/[0.12] text-zinc-300"
                 : "bg-black/[0.04] border border-black/[0.08] text-[#141518]"
@@ -132,7 +132,7 @@ export default function ArchitecturePage() {
           </div>
 
           <h1
-            className={`text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.05] transition-colors ${
+            className={`text-3xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.05] transition-colors ${
               isDark ? "text-white" : "text-[#141518]"
             }`}
           >
@@ -143,7 +143,7 @@ export default function ArchitecturePage() {
           </h1>
 
           <p
-            className={`mt-6 text-base sm:text-xl font-light leading-relaxed max-w-3xl transition-colors ${
+            className={`mt-4 sm:mt-6 text-sm sm:text-xl font-light leading-relaxed max-w-3xl transition-colors ${
               isDark ? "text-zinc-400" : "text-zinc-600"
             }`}
           >
@@ -154,16 +154,16 @@ export default function ArchitecturePage() {
       </section>
 
       {/* Interactive Architecture Explorer */}
-      <section className="relative pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="relative pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-2 mb-12">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-8 sm:mb-12">
           {PILLARS.map((p) => {
             const isActive = activePillar === p.id;
             return (
               <button
                 key={p.id}
                 onClick={() => setActivePillar(p.id)}
-                className={`px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                   isActive
                     ? isDark
                       ? "bg-white text-black font-bold shadow-md"
@@ -181,14 +181,14 @@ export default function ArchitecturePage() {
 
         {/* Feature Showcase Card */}
         <div
-          className={`grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border transition-all duration-500 ${
+          className={`grid grid-cols-1 lg:grid-cols-12 rounded-2xl sm:rounded-3xl overflow-hidden border transition-all duration-500 ${
             isDark
               ? "bg-[#252528] border-white/[0.1] shadow-2xl"
               : "bg-white border-black/[0.08] shadow-xl"
           }`}
         >
           {/* Visual Showcase (7 cols) */}
-          <div className="lg:col-span-7 relative min-h-[380px] sm:min-h-[500px] bg-black">
+          <div className="lg:col-span-7 relative min-h-[280px] sm:min-h-[500px] bg-black">
             <Image
               src={current.image}
               alt={current.title}
@@ -198,18 +198,18 @@ export default function ArchitecturePage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
             {/* Stat Floating Badge */}
-            <div className="absolute bottom-6 left-6 p-4 rounded-2xl bg-black/80 border border-white/15 backdrop-blur-md">
-              <span className="text-2xl sm:text-3xl font-black font-mono text-white block">
+            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/80 border border-white/15 backdrop-blur-md">
+              <span className="text-xl sm:text-3xl font-black font-mono text-white block">
                 {current.stat}
               </span>
-              <span className="text-xs font-mono text-amber-400 uppercase tracking-wider">
+              <span className="text-[10px] sm:text-xs font-mono text-amber-400 uppercase tracking-wider">
                 {current.statLabel}
               </span>
             </div>
           </div>
 
           {/* Details & Specs (5 cols) */}
-          <div className="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between">
+          <div className="lg:col-span-5 p-6 sm:p-12 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-500 font-bold mb-3">
                 <span>SYSTEM {current.number}</span>
@@ -259,16 +259,16 @@ export default function ArchitecturePage() {
       </section>
 
       {/* Engineering Comparison Matrix */}
-      <section className="relative pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <section className="relative pb-24 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <span className="text-xs font-mono uppercase tracking-widest text-amber-500 font-bold block mb-2">
             Comparative Analysis
           </span>
-          <h3 className="text-3xl sm:text-4xl font-black uppercase tracking-tight">
+          <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight">
             AeroClimate vs. Standard HVAC
           </h3>
           <p
-            className={`mt-3 text-sm sm:text-base font-light ${
+            className={`mt-2 sm:mt-3 text-xs sm:text-base font-light ${
               isDark ? "text-zinc-400" : "text-zinc-600"
             }`}
           >
@@ -276,53 +276,59 @@ export default function ArchitecturePage() {
           </p>
         </div>
 
+        {/* Mobile Swipe Hint */}
+        <div className="flex items-center justify-between mb-2.5 px-1 sm:hidden text-[11px] font-mono text-zinc-500">
+          <span>SPECIFICATION MATRIX</span>
+          <span>Swipe horizontally →</span>
+        </div>
+
         <div
-          className={`overflow-x-auto rounded-3xl border transition-colors ${
+          className={`overflow-x-auto rounded-2xl sm:rounded-3xl border transition-colors ${
             isDark ? "bg-[#252528] border-white/[0.1]" : "bg-white border-black/[0.08]"
           }`}
         >
-          <table className="w-full text-left text-xs font-mono border-collapse">
+          <table className="w-full min-w-[620px] text-left text-xs font-mono border-collapse">
             <thead>
               <tr
                 className={`border-b ${
                   isDark ? "border-white/[0.08] bg-white/[0.02]" : "border-black/[0.08] bg-black/[0.02]"
                 }`}
               >
-                <th className="p-5 font-bold uppercase text-zinc-500">Metric / Dimension</th>
-                <th className="p-5 font-bold uppercase text-zinc-500">Standard Luxury Forced Air</th>
-                <th className="p-5 font-bold uppercase text-amber-500 bg-amber-500/10">AeroClimate System</th>
+                <th className="p-4 sm:p-5 font-bold uppercase text-zinc-500">Metric / Dimension</th>
+                <th className="p-4 sm:p-5 font-bold uppercase text-zinc-500">Standard Luxury Forced Air</th>
+                <th className="p-4 sm:p-5 font-bold uppercase text-amber-500 bg-amber-500/10">AeroClimate System</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/[0.06] dark:divide-white/[0.06]">
               <tr>
-                <td className="p-5 font-semibold">Visible Hardware</td>
-                <td className="p-5 text-zinc-500">Exposed 4x10 & 6x12 ceiling stamped grilles</td>
-                <td className="p-5 font-bold text-emerald-500 bg-amber-500/5">0 Visible Supply Grilles (12mm reveals)</td>
+                <td className="p-4 sm:p-5 font-semibold">Visible Hardware</td>
+                <td className="p-4 sm:p-5 text-zinc-500">Exposed 4x10 & 6x12 ceiling stamped grilles</td>
+                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">0 Visible Supply Grilles (12mm reveals)</td>
               </tr>
               <tr>
-                <td className="p-5 font-semibold">Sound Profile (Noise Floor)</td>
-                <td className="p-5 text-zinc-500">32 – 44 dBA (Audible fan rush & duct roar)</td>
-                <td className="p-5 font-bold text-emerald-500 bg-amber-500/5">&lt; 18 dBA Certified Whisper Floor</td>
+                <td className="p-4 sm:p-5 font-semibold">Sound Profile (Noise Floor)</td>
+                <td className="p-4 sm:p-5 text-zinc-500">32 – 44 dBA (Audible fan rush & duct roar)</td>
+                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">&lt; 18 dBA Certified Whisper Floor</td>
               </tr>
               <tr>
-                <td className="p-5 font-semibold">Room-to-Room Delta</td>
-                <td className="p-5 text-zinc-500">±3.5°F to 5.0°F hot/cold spots across double-height glass</td>
-                <td className="p-5 font-bold text-emerald-500 bg-amber-500/5">±0.2°F Room-to-Room Precision Equilibrium</td>
+                <td className="p-4 sm:p-5 font-semibold">Room-to-Room Delta</td>
+                <td className="p-4 sm:p-5 text-zinc-500">±3.5°F to 5.0°F hot/cold spots across double-height glass</td>
+                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">±0.2°F Room-to-Room Precision Equilibrium</td>
               </tr>
               <tr>
-                <td className="p-5 font-semibold">Sub-Zero Heat Capacity</td>
-                <td className="p-5 text-zinc-500">Derates below 25°F; triggers expensive heat strips</td>
-                <td className="p-5 font-bold text-emerald-500 bg-amber-500/5">100% Heating Output Down to -22°F</td>
+                <td className="p-4 sm:p-5 font-semibold">Sub-Zero Heat Capacity</td>
+                <td className="p-4 sm:p-5 text-zinc-500">Derates below 25°F; triggers expensive heat strips</td>
+                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">100% Heating Output Down to -22°F</td>
               </tr>
               <tr>
-                <td className="p-5 font-semibold">Slab Radiant Synergy</td>
-                <td className="p-5 text-zinc-500">Separate system requiring separate contractor coordination</td>
-                <td className="p-5 font-bold text-emerald-500 bg-amber-500/5">Unified Hydronic + Inverter Architecture</td>
+                <td className="p-4 sm:p-5 font-semibold">Slab Radiant Synergy</td>
+                <td className="p-4 sm:p-5 text-zinc-500">Separate system requiring separate contractor coordination</td>
+                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">Unified Hydronic + Inverter Architecture</td>
               </tr>
               <tr>
-                <td className="p-5 font-semibold">Air Purification</td>
-                <td className="p-5 text-zinc-500">Standard MERV 8 fiberglass filters</td>
-                <td className="p-5 font-bold text-emerald-500 bg-amber-500/5">MERV 16 Hospital-Grade + Energy Recovery ERV</td>
+                <td className="p-4 sm:p-5 font-semibold">Air Purification</td>
+                <td className="p-4 sm:p-5 text-zinc-500">Standard MERV 8 fiberglass filters</td>
+                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">MERV 16 Hospital-Grade + Energy Recovery ERV</td>
               </tr>
             </tbody>
           </table>
@@ -330,15 +336,15 @@ export default function ArchitecturePage() {
 
         {/* CTA Banner */}
         <div
-          className={`mt-16 p-8 sm:p-12 rounded-3xl border text-center transition-colors ${
+          className={`mt-12 sm:mt-16 p-6 sm:p-12 rounded-2xl sm:rounded-3xl border text-center transition-colors ${
             isDark ? "bg-[#252528] border-white/[0.1]" : "bg-white border-black/[0.08]"
           }`}
         >
-          <h4 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mb-3">
+          <h4 className="text-xl sm:text-3xl font-black uppercase tracking-tight mb-3">
             Ready to integrate with your architectural drawings?
           </h4>
           <p
-            className={`text-sm sm:text-base max-w-xl mx-auto font-light mb-8 ${
+            className={`text-xs sm:text-base max-w-xl mx-auto font-light mb-6 sm:mb-8 ${
               isDark ? "text-zinc-400" : "text-zinc-600"
             }`}
           >
@@ -346,7 +352,7 @@ export default function ArchitecturePage() {
           </p>
           <Link
             href="/contact"
-            className={`inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md ${
+            className={`inline-flex items-center gap-2 px-7 sm:px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md ${
               isDark
                 ? "bg-white text-black hover:bg-zinc-200"
                 : "bg-[#141518] text-white hover:bg-black"

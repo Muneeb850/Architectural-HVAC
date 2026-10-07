@@ -166,14 +166,14 @@ export default function InvisibleArchitectureSection() {
           </p>
 
           {/* Minimalist Floating Tabs - Clean pills, NO Cluttered Boxes */}
-          <div className="mt-8 inline-flex items-center gap-2 p-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md">
+          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center sm:inline-flex items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md max-w-full">
             {MODES.map((mode) => {
               const isActive = activeMode.id === mode.id;
               return (
                 <button
                   key={mode.id}
                   onClick={() => setActiveMode(mode)}
-                  className={`px-4 sm:px-6 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                  className={`px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-xl sm:rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                     isActive
                       ? "bg-[#141518] dark:bg-white text-white dark:text-black font-bold shadow-md shadow-black/10"
                       : "text-zinc-600 dark:text-zinc-400 hover:text-[#141518] dark:hover:text-white"
@@ -187,7 +187,7 @@ export default function InvisibleArchitectureSection() {
         </div>
 
         {/* Cinematic Full-Bleed Showcase Visual */}
-        <div className="relative w-full aspect-[16/10] sm:aspect-[21/10] max-h-[640px] rounded-3xl overflow-hidden border border-black/[0.1] shadow-2xl bg-[#06080d] group">
+        <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[21/10] min-h-[380px] sm:min-h-0 max-h-[640px] rounded-3xl overflow-hidden border border-black/[0.1] shadow-2xl bg-[#06080d] group">
           {/* Main Visual Image with Smooth Crossfade */}
           <Image
             src={activeMode.image}
@@ -210,44 +210,44 @@ export default function InvisibleArchitectureSection() {
           >
             {/* Pulsating target point */}
             <div className="relative flex items-center justify-center">
-              <span className="w-10 h-10 rounded-full bg-white/25 animate-ping absolute" />
-              <div className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-xl cursor-pointer">
-                <span className="w-2 h-2 rounded-full bg-amber-500" />
+              <span className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-white/25 animate-ping absolute" />
+              <div className="w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-white text-black flex items-center justify-center shadow-xl cursor-pointer">
+                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-amber-500" />
               </div>
             </div>
 
             {/* Floating Annotation Tag */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-9 w-64 p-3 rounded-xl bg-white/95 text-[#141518] border border-black/[0.1] backdrop-blur-md text-left shadow-2xl pointer-events-none">
-              <span className="text-[10px] font-mono text-amber-600 uppercase tracking-widest block font-bold">
+            <div className="absolute left-1/2 -translate-x-1/2 top-7 sm:top-9 w-48 sm:w-64 p-2.5 sm:p-3 rounded-xl bg-white/95 text-[#141518] border border-black/[0.1] backdrop-blur-md text-left shadow-2xl pointer-events-none">
+              <span className="text-[9px] sm:text-[10px] font-mono text-amber-600 uppercase tracking-widest block font-bold">
                 CONCEALED DETAIL
               </span>
-              <p className="text-xs font-semibold text-[#141518] mt-0.5">{activeMode.callout.title}</p>
-              <p className="text-[11px] text-zinc-600 mt-0.5 leading-snug font-light">
+              <p className="text-[11px] sm:text-xs font-semibold text-[#141518] mt-0.5">{activeMode.callout.title}</p>
+              <p className="text-[10px] sm:text-[11px] text-zinc-600 mt-0.5 leading-snug font-light">
                 {activeMode.callout.text}
               </p>
             </div>
           </div>
 
           {/* Bottom Floating Information Overlay */}
-          <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4">
             <div className="max-w-xl">
-              <span className="text-xs font-mono text-amber-300 uppercase tracking-widest block mb-1">
+              <span className="text-[10px] sm:text-xs font-mono text-amber-300 uppercase tracking-widest block mb-0.5 sm:mb-1">
                 {activeMode.tag}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white drop-shadow-md">
+              <h3 className="text-xl sm:text-3xl font-extrabold uppercase tracking-tight text-white drop-shadow-md">
                 {activeMode.title}
               </h3>
-              <p className="mt-1.5 text-xs sm:text-sm text-zinc-200 font-light leading-relaxed max-w-lg drop-shadow">
+              <p className="mt-1 sm:mt-1.5 text-xs sm:text-sm text-zinc-200 font-light leading-relaxed max-w-lg drop-shadow line-clamp-2 sm:line-clamp-none">
                 {activeMode.description}
               </p>
             </div>
 
             {/* Clean Live Metric Callout */}
-            <div className="px-5 py-3 rounded-2xl bg-black/75 border border-white/[0.15] backdrop-blur-md self-start sm:self-auto shrink-0 shadow-xl">
-              <span className="text-2xl sm:text-3xl font-black font-mono text-white block">
+            <div className="px-3.5 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-black/75 border border-white/[0.15] backdrop-blur-md self-start sm:self-auto shrink-0 shadow-xl">
+              <span className="text-xl sm:text-3xl font-black font-mono text-white block">
                 {activeMode.stat}
               </span>
-              <span className="text-[11px] font-mono text-zinc-300 block mt-0.5">
+              <span className="text-[10px] sm:text-[11px] font-mono text-zinc-300 block mt-0.5">
                 {activeMode.statLabel}
               </span>
             </div>

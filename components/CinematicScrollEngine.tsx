@@ -372,15 +372,15 @@ export default function CinematicScrollEngine() {
         >
           <div className="max-w-4xl mx-auto flex flex-col items-center pointer-events-auto">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/70 border border-white/20 text-xs font-mono tracking-widest uppercase text-amber-300 mb-6 backdrop-blur-md shadow-lg shadow-black/80 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span>Architectural Climate Engineering</span>
-              <span className="text-zinc-500">|</span>
-              <span className="text-emerald-400 font-bold">2.5K Ultra-Sharp</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/75 border border-white/20 text-[10px] sm:text-xs font-mono tracking-widest uppercase text-amber-300 mb-5 sm:mb-6 backdrop-blur-md shadow-lg shadow-black/80 font-semibold max-w-full truncate">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+              <span className="truncate">Architectural Climate Engineering</span>
+              <span className="text-zinc-500 hidden sm:inline">|</span>
+              <span className="text-emerald-400 font-bold hidden sm:inline">2.5K Ultra-Sharp</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            <h1 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               <span className="block tracking-tight text-white">COMFORT,</span>
               <span className="block mt-1 bg-gradient-to-r from-amber-200 via-orange-400 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(245,158,11,0.5)]">
                 ENGINEERED.
@@ -388,24 +388,24 @@ export default function CinematicScrollEngine() {
             </h1>
 
             {/* Supporting Description */}
-            <p className="mt-6 max-w-xl text-base sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+            <p className="mt-4 sm:mt-6 max-w-xl text-sm sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] px-2 sm:px-0">
               Intelligent heating, cooling, and laminar airflow designed around the way you live. Visualizing what happens behind the walls.
             </p>
 
             {/* CTAs & Controls */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               <button
                 onClick={toggleVideoPlayback}
-                className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-black text-xs font-bold tracking-wider uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 cursor-pointer"
+                className="group inline-flex items-center gap-2 sm:gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black text-[11px] sm:text-xs font-bold tracking-wider uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 cursor-pointer"
               >
                 {isPlayingVideo ? (
                   <>
-                    <Pause className="w-4 h-4 fill-black" />
+                    <Pause className="w-3.5 h-3.5 fill-black" />
                     <span>Pause Movie</span>
                   </>
                 ) : (
                   <>
-                    <Play className="w-4 h-4 fill-black" />
+                    <Play className="w-3.5 h-3.5 fill-black" />
                     <span>Play 4K Flythrough</span>
                   </>
                 )}
@@ -413,17 +413,17 @@ export default function CinematicScrollEngine() {
 
               <button
                 onClick={() => jumpToChapter(CHAPTERS[1])}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black/60 border border-white/20 text-white text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition-colors backdrop-blur-md cursor-pointer shadow-lg"
+                className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-black/60 border border-white/20 text-white text-[11px] sm:text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition-colors backdrop-blur-md cursor-pointer shadow-lg"
               >
                 <span>Scroll To Explore</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             {/* Scroll Indicator */}
-            <div className="mt-12 flex flex-col items-center gap-1.5 text-zinc-300 font-mono text-[11px] tracking-widest uppercase animate-bounce drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-              <span>Scroll Wheel To Travel Through Architecture</span>
-              <ChevronDown className="w-4 h-4 text-amber-400" />
+            <div className="mt-8 sm:mt-12 flex flex-col items-center gap-1 text-zinc-300 font-mono text-[10px] sm:text-[11px] tracking-widest uppercase animate-bounce drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+              <span>Scroll To Explore Architecture</span>
+              <ChevronDown className="w-3.5 h-3.5 text-amber-400" />
             </div>
           </div>
         </div>
@@ -432,7 +432,7 @@ export default function CinematicScrollEngine() {
             ACT 02 (0.16 - 0.33): SECTION 02 — THE STRUCTURAL CUTAWAY
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-6 sm:px-12 lg:px-20 pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
             p >= 0.16 && p < 0.33
               ? "opacity-100 translate-x-0"
               : p < 0.16
@@ -441,20 +441,20 @@ export default function CinematicScrollEngine() {
           }`}
         >
           <div className="max-w-xl pointer-events-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-[11px] font-mono uppercase tracking-widest text-amber-300 font-bold mb-4 backdrop-blur-md drop-shadow-md">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-amber-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
               <Layers className="w-3.5 h-3.5 text-amber-400" />
               <span>Section 02 — The Structural Cutaway</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               Comfort doesn&apos;t start at the thermostat.
             </h2>
 
-            <p className="mt-3 text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               It starts behind the walls.
             </p>
 
-            <p className="mt-4 text-base sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg">
+            <p className="mt-2.5 sm:mt-4 text-xs sm:text-base text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg line-clamp-3 sm:line-clamp-none">
               As the camera cuts through the envelope, hidden supply trunks and insulated return paths appear. Dual-zone architecture balances sub-zero winter temperatures on the left and summer cooling on the right.
             </p>
           </div>
@@ -464,7 +464,7 @@ export default function CinematicScrollEngine() {
             ACT 03 (0.33 - 0.50): SECTION 03 — THE AIRFLOW STORY
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-end px-6 sm:px-12 lg:px-20 pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
             p >= 0.33 && p < 0.50
               ? "opacity-100 translate-y-0"
               : p < 0.33
@@ -472,21 +472,21 @@ export default function CinematicScrollEngine() {
               : "opacity-0 -translate-y-12"
           }`}
         >
-          <div className="max-w-xl text-right pointer-events-auto flex flex-col items-end">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-[11px] font-mono uppercase tracking-widest text-emerald-300 font-bold mb-4 backdrop-blur-md drop-shadow-md">
+          <div className="max-w-xl text-left sm:text-right pointer-events-auto flex flex-col items-start sm:items-end">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-emerald-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
               <Wind className="w-3.5 h-3.5 text-emerald-400" />
               <span>Section 03 — Airflow Dynamics</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               Air should move with purpose.
             </h2>
 
-            <p className="mt-3 text-xl sm:text-2xl font-bold text-emerald-300 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold text-emerald-300 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               Laminar circulation without turbulence or drafts.
             </p>
 
-            <p className="mt-4 text-base sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg">
+            <p className="mt-2.5 sm:mt-4 text-xs sm:text-base text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg line-clamp-3 sm:line-clamp-none">
               Luminous energy lines trace aerodynamic currents. Fresh air enters through high-induction ceiling registers, displacing stale air without acoustic noise.
             </p>
           </div>
@@ -496,7 +496,7 @@ export default function CinematicScrollEngine() {
             ACT 04 (0.50 - 0.67): SECTION 04 — THE HIDDEN MACHINE
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-6 sm:px-12 lg:px-20 pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
             p >= 0.50 && p < 0.67
               ? "opacity-100 translate-y-0"
               : p < 0.50
@@ -505,20 +505,20 @@ export default function CinematicScrollEngine() {
           }`}
         >
           <div className="max-w-xl pointer-events-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-[11px] font-mono uppercase tracking-widest text-sky-300 font-bold mb-4 backdrop-blur-md drop-shadow-md">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-sky-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
               <Cpu className="w-3.5 h-3.5 text-sky-400" />
               <span>Section 04 — Technical Mechanical Core</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               The machine behind the comfort.
             </h2>
 
-            <p className="mt-3 text-xl sm:text-2xl font-bold text-sky-300 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold text-sky-300 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               Precision engineering, hidden behind the experience.
             </p>
 
-            <p className="mt-4 text-base sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg">
+            <p className="mt-2.5 sm:mt-4 text-xs sm:text-base text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg line-clamp-3 sm:line-clamp-none">
               Transitioning into the acoustic mechanical heart. High-inverter compressors modulate down to 10% capacity, matching thermal envelope load microsecond by microsecond with zero energy waste.
             </p>
           </div>
@@ -528,7 +528,7 @@ export default function CinematicScrollEngine() {
             ACT 05 (0.67 - 0.84): SECTION 05 — VILLA MORPH & SEASONS
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-end px-6 sm:px-12 lg:px-20 pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
             p >= 0.67 && p < 0.84
               ? "opacity-100 translate-x-0"
               : p < 0.67
@@ -536,21 +536,21 @@ export default function CinematicScrollEngine() {
               : "opacity-0 -translate-x-12"
           }`}
         >
-          <div className="max-w-xl text-right pointer-events-auto flex flex-col items-end">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-[11px] font-mono uppercase tracking-widest text-amber-300 font-bold mb-4 backdrop-blur-md drop-shadow-md">
+          <div className="max-w-xl text-left sm:text-right pointer-events-auto flex flex-col items-start sm:items-end">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-amber-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
               <span>Section 05 — The Morphing Transformation</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.05] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               One system. Every season.
             </h2>
 
-            <p className="mt-3 text-xl sm:text-2xl font-bold bg-gradient-to-r from-amber-300 via-sky-200 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold bg-gradient-to-r from-amber-300 via-sky-200 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               Designed to maintain comfort as the world outside changes.
             </p>
 
-            <p className="mt-4 text-base sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg">
+            <p className="mt-2.5 sm:mt-4 text-xs sm:text-base text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] max-w-lg line-clamp-3 sm:line-clamp-none">
               Floor-to-ceiling glazing meets sub-zero mountain snow outside, while glowing in-slab hydronic coils and sleek wall mini-splits envelope the living spaces in total warmth.
             </p>
           </div>
@@ -567,31 +567,31 @@ export default function CinematicScrollEngine() {
           }`}
         >
           <div className="max-w-3xl mx-auto flex flex-col items-center pointer-events-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-white/20 text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-5 backdrop-blur-md drop-shadow-md">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-4 sm:mb-5 backdrop-blur-md drop-shadow-md">
               <span>Act 06 — Complete Architectural Integration</span>
             </div>
 
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            <h2 className="text-3xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               See the difference.{" "}
-              <span className="block mt-2 bg-gradient-to-r from-amber-300 via-emerald-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(16,185,129,0.5)]">
+              <span className="block mt-1 sm:mt-2 bg-gradient-to-r from-amber-300 via-emerald-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(16,185,129,0.5)]">
                 Feel the comfort.
               </span>
             </h2>
 
-            <p className="mt-5 max-w-xl text-base sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+            <p className="mt-3 sm:mt-5 max-w-xl text-sm sm:text-lg text-zinc-100 font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] px-2 sm:px-0">
               From foundation to roofline, intelligent engineering transforms invisible air into seamless living luxury.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               <a
                 href="#engineering"
-                className="px-7 py-3.5 rounded-full bg-white text-black text-xs font-bold tracking-wider uppercase hover:bg-zinc-200 transition-colors shadow-xl shadow-white/10"
+                className="px-5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-black text-[11px] sm:text-xs font-bold tracking-wider uppercase hover:bg-zinc-200 transition-colors shadow-xl shadow-white/10"
               >
                 Inspect Engineering Specs
               </a>
               <a
                 href="#contact"
-                className="px-7 py-3.5 rounded-full bg-black/60 border border-white/20 text-white text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition-colors backdrop-blur-md shadow-lg"
+                className="px-5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-black/60 border border-white/20 text-white text-[11px] sm:text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition-colors backdrop-blur-md shadow-lg"
               >
                 Request Consultation
               </a>
@@ -602,25 +602,26 @@ export default function CinematicScrollEngine() {
         {/* ========================================================
             CINEMATIC HUD & CAMERA TELEMETRY FOOTER
         ======================================================== */}
-        <div className="pointer-events-none absolute bottom-5 left-6 right-6 z-30 flex items-center justify-between text-zinc-400 font-mono text-[11px]">
+        <div className="pointer-events-none absolute bottom-4 sm:bottom-5 left-3 sm:left-6 right-3 sm:right-6 z-30 flex items-center justify-between text-zinc-400 font-mono text-[10px] sm:text-[11px] gap-2">
           {/* Left: Frame counter & Playback toggle */}
-          <div className="flex items-center gap-3 bg-[#000000]/80 px-4 py-2 rounded-full border border-white/[0.12] backdrop-blur-md pointer-events-auto shadow-xl">
+          <div className="flex items-center gap-2 sm:gap-3 bg-[#000000]/85 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/[0.12] backdrop-blur-md pointer-events-auto shadow-xl">
             <button
               onClick={toggleVideoPlayback}
-              className="flex items-center gap-1.5 text-white hover:text-amber-400 transition-colors font-bold cursor-pointer"
+              className="flex items-center gap-1.5 text-white hover:text-amber-400 transition-colors font-bold cursor-pointer whitespace-nowrap"
             >
               {isPlayingVideo ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
-              <span>{isPlayingVideo ? "PAUSE MOVIE" : "PLAY FLYTHROUGH"}</span>
+              <span>{isPlayingVideo ? "PAUSE" : "PLAY"}</span>
+              <span className="hidden sm:inline">{isPlayingVideo ? " MOVIE" : " FLYTHROUGH"}</span>
             </button>
-            <span className="text-zinc-600">•</span>
-            <span className="text-emerald-400 font-semibold">2.5K QHD (2560x1440)</span>
             <span className="text-zinc-600 hidden sm:inline">•</span>
-            <span className="text-zinc-400 hidden sm:inline">PROGRESS {Math.round(p * 100)}%</span>
+            <span className="text-emerald-400 font-semibold hidden md:inline">2.5K QHD</span>
+            <span className="text-zinc-600 hidden sm:inline">•</span>
+            <span className="text-zinc-400 hidden sm:inline">{Math.round(p * 100)}%</span>
           </div>
 
           {/* Right: Chapter Title indicator */}
-          <div className="flex items-center gap-2 bg-[#000000]/80 px-4 py-2 rounded-full border border-white/[0.12] backdrop-blur-md ml-auto pointer-events-auto shadow-xl">
-            <span className="text-zinc-500 uppercase text-[10px]">CHAPTER:</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-[#000000]/85 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/[0.12] backdrop-blur-md ml-auto pointer-events-auto shadow-xl whitespace-nowrap">
+            <span className="hidden sm:inline text-zinc-500 uppercase text-[10px]">CH:</span>
             <span className="text-white font-semibold">
               {CHAPTERS[activeChapterIndex]?.title}
             </span>
