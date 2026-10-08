@@ -677,8 +677,8 @@ export default function CinematicScrollEngine() {
           })}
         </aside>
 
-        {/* Soft Editorial Fade into Creamy Alabaster (#FAF8F5) or Dark Graphite (#1D1D1E) Page Flow */}
-        <div className="pointer-events-none absolute bottom-0 inset-x-0 h-44 bg-gradient-to-b from-transparent via-[#FAF8F5]/60 to-[#FAF8F5] dark:via-[#1D1D1E]/60 dark:to-[#1D1D1E] z-20 transition-all duration-500" />
+        {/* Soft Editorial Fade into Dark Graphite (#1D1D1E) Page Flow */}
+        <div className="pointer-events-none absolute bottom-0 inset-x-0 h-44 bg-gradient-to-b from-transparent via-[#1D1D1E]/60 to-[#1D1D1E] z-20 transition-all duration-500" />
       </div>
     </div>
   );

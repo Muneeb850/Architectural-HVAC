@@ -3,10 +3,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { ArrowLeftRight } from "lucide-react";
-import { useTheme } from "@/context/ThemeContext";
 
 export default function SeasonTransformationSection() {
-  const { isDark } = useTheme();
   const [sliderPos, setSliderPos] = useState<number>(50); // percentage 0 to 100
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -40,61 +38,35 @@ export default function SeasonTransformationSection() {
   return (
     <section
       id="seasons"
-      className={`relative w-full py-28 overflow-hidden border-t transition-colors duration-500 ${
-        isDark ? "bg-[#1D1D1E] text-white border-white/[0.08]" : "bg-[#FAF8F5] text-[#141518] border-black/[0.06]"
-      }`}
+      className="relative w-full py-28 overflow-hidden border-t bg-[#1D1D1E] text-white border-white/[0.08]"
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-4 backdrop-blur-md transition-colors ${
-              isDark
-                ? "bg-white/[0.05] border border-white/[0.12] text-zinc-200"
-                : "bg-black/[0.04] border border-black/[0.08] text-[#141518]"
-            }`}
-          >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-4 backdrop-blur-md bg-white/[0.05] border border-white/[0.12] text-zinc-200">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             <span>Section 04 — Seasonal Equilibrium</span>
           </div>
 
-          <h2
-            className={`text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight transition-colors ${
-              isDark ? "text-white" : "text-[#141518]"
-            }`}
-          >
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-white">
             One System.{" "}
-            <span
-              className={`bg-gradient-to-r bg-clip-text text-transparent ${
-                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
-              }`}
-            >
+            <span className="bg-gradient-to-r bg-clip-text text-transparent from-amber-300 to-amber-100">
               Every Season.
             </span>
           </h2>
 
-          <p
-            className={`mt-4 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto transition-colors ${
-              isDark ? "text-zinc-400" : "text-zinc-600"
-            }`}
-          >
+          <p className="mt-4 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto text-zinc-400">
             Designed to maintain comfort as the world outside changes. The architecture remains rock solid while the internal thermodynamics adapt instantly to sub-zero blizzards or scorching heatwaves.
           </p>
 
           {/* Preset Buttons */}
-          <div
-            className={`mt-6 sm:mt-8 flex flex-wrap sm:flex-nowrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-xl backdrop-blur-md max-w-full transition-colors ${
-              isDark ? "bg-white/[0.04] border border-white/[0.08]" : "bg-black/[0.04] border border-black/[0.08]"
-            }`}
-          >
+          <div className="mt-6 sm:mt-8 flex flex-wrap sm:flex-nowrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-xl backdrop-blur-md max-w-full bg-white/[0.04] border border-white/[0.08]">
             <button
               onClick={() => setSliderPos(20)}
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos < 35
                   ? "bg-amber-600 text-white font-bold shadow-md shadow-amber-600/20"
-                  : isDark
-                  ? "text-zinc-400 hover:text-white"
-                  : "text-zinc-600 hover:text-[#141518]"
+                  : "text-zinc-400 hover:text-white"
               }`}
             >
               <span>Winter (-4°F)</span>
@@ -103,12 +75,8 @@ export default function SeasonTransformationSection() {
               onClick={() => setSliderPos(50)}
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos >= 35 && sliderPos <= 65
-                  ? isDark
-                    ? "bg-white text-black font-bold shadow-md"
-                    : "bg-[#141518] text-white font-bold shadow-md shadow-black/10"
-                  : isDark
-                  ? "text-zinc-400 hover:text-white"
-                  : "text-zinc-600 hover:text-[#141518]"
+                  ? "bg-white text-black font-bold shadow-md"
+                  : "text-zinc-400 hover:text-white"
               }`}
             >
               <span>50/50 Split</span>
@@ -118,9 +86,7 @@ export default function SeasonTransformationSection() {
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos > 65
                   ? "bg-sky-600 text-white font-bold shadow-md shadow-sky-600/20"
-                  : isDark
-                  ? "text-zinc-400 hover:text-white"
-                  : "text-zinc-600 hover:text-[#141518]"
+                  : "text-zinc-400 hover:text-white"
               }`}
             >
               <span>Summer (+89°F)</span>

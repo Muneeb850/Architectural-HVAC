@@ -8,7 +8,6 @@ import {
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
-import { useTheme } from "@/context/ThemeContext";
 
 interface SpatialCardData {
   id: number;
@@ -123,7 +122,6 @@ const CARDS: SpatialCardData[] = [
 ];
 
 export default function IntroductionSection() {
-  const { isDark } = useTheme();
   const [continuousIndex, setContinuousIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
@@ -263,9 +261,7 @@ export default function IntroductionSection() {
     <section
       ref={sectionRef}
       id="introduction"
-      className={`relative w-full border-t select-none transition-colors duration-500 ${
-        isDark ? "bg-[#1D1D1E] text-white border-white/[0.08]" : "bg-[#FAF8F5] text-[#141518] border-black/[0.06]"
-      }`}
+      className="relative w-full border-t select-none bg-[#1D1D1E] text-white border-white/[0.08]"
     >
       {/* Pinned Viewport Container */}
       <div
@@ -284,30 +280,18 @@ export default function IntroductionSection() {
 
         {/* Header (Top) */}
         <div className="relative z-10 text-center max-w-3xl mx-auto pt-2 sm:pt-4">
-          <div
-            className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-xs font-mono uppercase tracking-widest mb-2 sm:mb-3 backdrop-blur-md transition-colors ${
-              isDark ? "bg-white/[0.05] border-white/[0.12] text-zinc-200" : "bg-black/[0.04] border-black/[0.08] text-[#141518]"
-            }`}
-          >
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-xs font-mono uppercase tracking-widest mb-2 sm:mb-3 backdrop-blur-md bg-white/[0.05] border-white/[0.12] text-zinc-200">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             <span>Spatial Architecture</span>
-            <span className={isDark ? "text-zinc-500 hidden sm:inline" : "text-zinc-400 hidden sm:inline"}>|</span>
-            <span className={`${isDark ? "text-sky-400" : "text-sky-600"} font-semibold hidden sm:inline`}>
+            <span className="text-zinc-500 hidden sm:inline">|</span>
+            <span className="text-sky-400 font-semibold hidden sm:inline">
               Scroll Down To Advance
             </span>
           </div>
 
-          <h2
-            className={`text-xl sm:text-3xl lg:text-5xl font-black uppercase tracking-tight leading-tight transition-colors ${
-              isDark ? "text-white" : "text-[#141518]"
-            }`}
-          >
+          <h2 className="text-xl sm:text-3xl lg:text-5xl font-black uppercase tracking-tight leading-tight text-white">
             Explore The Spatial{" "}
-            <span
-              className={`bg-gradient-to-r bg-clip-text text-transparent ${
-                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
-              }`}
-            >
+            <span className="bg-gradient-to-r bg-clip-text text-transparent from-amber-300 to-amber-100">
               Climate Universe.
             </span>
           </h2>
@@ -489,9 +473,7 @@ export default function IntroductionSection() {
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   dotIdx === activeIndex
                     ? "w-8 bg-amber-500 shadow-sm"
-                    : isDark
-                    ? "w-2 bg-white/20 hover:bg-white/40"
-                    : "w-2 bg-black/15 hover:bg-black/35"
+                    : "w-2 bg-white/20 hover:bg-white/40"
                 }`}
                 aria-label={`Scroll to card ${dotIdx + 1}`}
               />
@@ -499,22 +481,14 @@ export default function IntroductionSection() {
           </div>
 
           {/* Current Step Label */}
-          <span
-            className={`text-xs font-mono uppercase tracking-widest font-semibold transition-colors ${
-              isDark ? "text-zinc-300" : "text-zinc-600"
-            }`}
-          >
+          <span className="text-xs font-mono uppercase tracking-widest font-semibold text-zinc-300">
             0{activeIndex + 1} / 0{CARDS.length} — {CARDS[activeIndex].title}
           </span>
 
           {/* Scroll Prompt with Animated Arrow */}
-          <div
-            className={`flex items-center gap-1.5 text-[11px] font-mono tracking-wider uppercase animate-bounce pt-0.5 transition-colors ${
-              isDark ? "text-zinc-400" : "text-zinc-500"
-            }`}
-          >
+          <div className="flex items-center gap-1.5 text-[11px] font-mono tracking-wider uppercase animate-bounce pt-0.5 text-zinc-400">
             <span>Scroll To Advance Cards</span>
-            <ChevronDown className={`w-3.5 h-3.5 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
+            <ChevronDown className="w-3.5 h-3.5 text-amber-400" />
           </div>
         </div>
       </div>

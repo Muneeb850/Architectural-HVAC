@@ -39,9 +39,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`dark ${outfit.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} antialiased`}
     >
-      <body className="min-h-screen selection:bg-amber-500/20 selection:text-amber-900 transition-colors duration-400">
+      <body className="min-h-screen bg-[#1D1D1E] text-white selection:bg-amber-500/20 selection:text-amber-300">
         <ThemeProvider>
           <SmoothScroll>
             {children}

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-type Theme = "light" | "dark";
+type Theme = "dark";
 
 interface ThemeContextType {
   theme: Theme;
@@ -12,45 +12,26 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: "light",
+  theme: "dark",
   toggleTheme: () => {},
   setTheme: () => {},
-  isDark: false,
+  isDark: true,
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("light");
-  const [mounted, setMounted] = useState(false);
+  const [theme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const handle = requestAnimationFrame(() => {
-      setMounted(true);
-      const saved = localStorage.getItem("aeroclimate_theme") as Theme | null;
-      if (saved === "dark" || saved === "light") {
-        setThemeState(saved);
-        document.documentElement.classList.toggle("dark", saved === "dark");
-        document.documentElement.setAttribute("data-theme", saved);
-      }
-    });
-    return () => cancelAnimationFrame(handle);
+    document.documentElement.classList.add("dark");
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("aeroclimate_theme", "dark");
   }, []);
 
-  const setTheme = (t: Theme) => {
-    setThemeState(t);
-    localStorage.setItem("aeroclimate_theme", t);
-    document.documentElement.classList.toggle("dark", t === "dark");
-    document.documentElement.setAttribute("data-theme", t);
-  };
-
-  const toggleTheme = () => {
-    const next = theme === "light" ? "dark" : "light";
-    setTheme(next);
-  };
-
-  const isDark = mounted ? theme === "dark" : false;
+  const setTheme = () => {};
+  const toggleTheme = () => {};
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, isDark }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, isDark: true }}>
       {children}
     </ThemeContext.Provider>
   );

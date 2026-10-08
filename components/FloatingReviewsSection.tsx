@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTheme } from "@/context/ThemeContext";
 
 interface Review {
   id: string;
@@ -91,7 +90,6 @@ const REVIEWS: Review[] = [
 ];
 
 export default function FloatingReviewsSection() {
-  const { isDark } = useTheme();
   const [filter, setFilter] = useState<"all" | "architect" | "contractor" | "homeowner">("all");
 
   const filteredReviews = REVIEWS.filter((r) => (filter === "all" ? true : r.category === filter));
@@ -99,63 +97,33 @@ export default function FloatingReviewsSection() {
   return (
     <section
       id="reviews"
-      className={`relative w-full py-20 sm:py-36 overflow-hidden transition-colors duration-500 border-t ${
-        isDark
-          ? "bg-[#1D1D1E] text-white border-white/[0.08]"
-          : "bg-[#FAF8F5] text-[#141518] border-black/[0.06]"
-      }`}
+      className="relative w-full py-20 sm:py-36 overflow-hidden border-t bg-[#1D1D1E] text-white border-white/[0.08]"
     >
       {/* Background Radial Ambiance */}
-      <div
-        className={`pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[180px] opacity-20 transition-all duration-700 ${
-          isDark ? "bg-amber-400/15" : "bg-amber-300/35"
-        }`}
-      />
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[180px] opacity-20 bg-amber-400/15" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-18">
-          <div
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-5 backdrop-blur-md transition-colors ${
-              isDark
-                ? "bg-white/[0.05] border border-white/[0.12] text-zinc-300"
-                : "bg-black/[0.04] border border-black/[0.08] text-[#141518]"
-            }`}
-          >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-5 backdrop-blur-md bg-white/[0.05] border border-white/[0.12] text-zinc-300">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             <span>Section 05 — Architectural Reviews</span>
           </div>
 
-          <h2
-            className={`text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight transition-colors ${
-              isDark ? "text-white" : "text-[#141518]"
-            }`}
-          >
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight text-white">
             Trusted by architects.{" "}
-            <span
-              className={`bg-gradient-to-r bg-clip-text text-transparent ${
-                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
-              }`}
-            >
+            <span className="bg-gradient-to-r from-amber-300 to-amber-100 bg-clip-text text-transparent">
               Felt by owners.
             </span>
           </h2>
 
-          <p
-            className={`mt-4 text-sm sm:text-lg font-light leading-relaxed max-w-2xl mx-auto transition-colors ${
-              isDark ? "text-zinc-400" : "text-zinc-600"
-            }`}
-          >
+          <p className="mt-4 text-sm sm:text-lg font-light leading-relaxed max-w-2xl mx-auto text-zinc-400">
             Real feedback from leading residential architects, general contractors, and luxury estate
             homeowners on the invisible difference.
           </p>
 
           {/* Interactive Filter Pills */}
-          <div
-            className={`mt-6 sm:mt-8 inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl sm:rounded-full backdrop-blur-md transition-colors max-w-full ${
-              isDark ? "bg-white/[0.04] border border-white/[0.08]" : "bg-black/[0.04] border border-black/[0.08]"
-            }`}
-          >
+          <div className="mt-6 sm:mt-8 inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl sm:rounded-full backdrop-blur-md max-w-full bg-white/[0.04] border border-white/[0.08]">
             {[
               { id: "all", label: "All Commissions" },
               { id: "architect", label: "Architects" },
@@ -169,12 +137,8 @@ export default function FloatingReviewsSection() {
                   onClick={() => setFilter(tab.id as typeof filter)}
                   className={`px-3 sm:px-5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? isDark
-                        ? "bg-white text-black font-bold shadow-md"
-                        : "bg-[#141518] text-white font-bold shadow-md shadow-black/10"
-                      : isDark
-                      ? "text-zinc-400 hover:text-white"
-                      : "text-zinc-600 hover:text-[#141518]"
+                      ? "bg-white text-black font-bold shadow-md"
+                      : "text-zinc-400 hover:text-white"
                   }`}
                 >
                   {tab.label}
@@ -191,11 +155,7 @@ export default function FloatingReviewsSection() {
               key={rev.id}
               className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-500 flex-col justify-between hover:-translate-y-1.5 ${
                 index >= 4 ? "hidden md:flex" : "flex"
-              } ${
-                isDark
-                  ? "bg-[#252528]/80 border-white/[0.1] hover:border-white/[0.25] hover:bg-[#28282C] shadow-2xl shadow-black/40"
-                  : "bg-white/90 border-black/[0.08] hover:border-black/[0.18] hover:bg-white shadow-xl shadow-black/[0.04]"
-              }`}
+              } bg-[#252528]/80 border-white/[0.1] hover:border-white/[0.25] hover:bg-[#28282C] shadow-2xl shadow-black/40`}
             >
               <div>
                 {/* Card Top: Typographic Rating & Commission Tag */}
@@ -204,61 +164,43 @@ export default function FloatingReviewsSection() {
                     <span className="text-[11px] font-mono tracking-widest text-amber-500 font-bold uppercase">
                       5.0 / 5.0
                     </span>
-                    <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase">
                       VERIFIED
                     </span>
                   </div>
 
-                  <span
-                    className={`font-mono text-xs tracking-widest uppercase transition-colors ${
-                      isDark ? "text-zinc-600 group-hover:text-amber-400/80" : "text-zinc-400 group-hover:text-amber-500/80"
-                    }`}
-                  >
+                  <span className="font-mono text-xs tracking-widest uppercase transition-colors text-zinc-500 group-hover:text-amber-400/80">
                     COMMISSION
                   </span>
                 </div>
 
                 {/* Review Text */}
-                <p
-                  className={`text-sm sm:text-base leading-relaxed font-light mb-6 transition-colors ${
-                    isDark ? "text-zinc-200" : "text-zinc-700"
-                  }`}
-                >
+                <p className="text-sm sm:text-base leading-relaxed font-light mb-6 text-zinc-200">
                   &ldquo;{rev.quote}&rdquo;
                 </p>
               </div>
 
               {/* Card Footer: Author Credentials & Verified Project Tag */}
-              <div className={`pt-5 border-t transition-colors ${isDark ? "border-white/[0.08]" : "border-black/[0.08]"}`}>
+              <div className="pt-5 border-t border-white/[0.08]">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h4
-                        className={`text-sm font-bold uppercase tracking-tight transition-colors ${
-                          isDark ? "text-white" : "text-[#141518]"
-                        }`}
-                      >
+                      <h4 className="text-sm font-bold uppercase tracking-tight text-white">
                         {rev.author}
                       </h4>
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
                     </div>
-                    <p className={`text-xs transition-colors ${isDark ? "text-zinc-400" : "text-zinc-500"}`}>
+                    <p className="text-xs text-zinc-400">
                       {rev.role} • {rev.firm}
                     </p>
-                    <span className={`text-[11px] font-mono block mt-0.5 ${isDark ? "text-zinc-500" : "text-zinc-400"}`}>
+                    <span className="text-[11px] font-mono block mt-0.5 text-zinc-500">
                       {rev.location}
                     </span>
                   </div>
                 </div>
 
                 {/* Verified Commission Badge */}
-                <div
-                  className={`mt-4 p-2.5 rounded-xl border flex items-center justify-between text-[11px] font-mono transition-colors ${
-                    isDark
-                      ? "bg-white/[0.03] border-white/[0.06] text-zinc-300"
-                      : "bg-black/[0.02] border-black/[0.06] text-zinc-700"
-                  }`}
-                >
+                <div className="mt-4 p-2.5 rounded-xl border flex items-center justify-between text-[11px] font-mono bg-white/[0.03] border-white/[0.06] text-zinc-300">
                   <span className="truncate pr-2 font-medium">{rev.project}</span>
                   <span className="text-amber-500 font-bold shrink-0">{rev.metric}</span>
                 </div>
@@ -270,4 +212,3 @@ export default function FloatingReviewsSection() {
     </section>
   );
 }
-

@@ -8,18 +8,10 @@ import SeasonTransformationSection from "@/components/SeasonTransformationSectio
 import FloatingReviewsSection from "@/components/FloatingReviewsSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
-import FloatingThemeToggle from "@/components/FloatingThemeToggle";
-import { useTheme } from "@/context/ThemeContext";
 
 export default function Home() {
-  const { isDark } = useTheme();
-
   return (
-    <div
-      className={`relative w-full min-h-screen selection:bg-amber-500/20 selection:text-amber-900 transition-colors duration-500 ${
-        isDark ? "bg-[#1D1D1E] text-white" : "bg-[#FAF8F5] text-[#141518]"
-      }`}
-    >
+    <div className="relative w-full min-h-screen bg-[#1D1D1E] text-white selection:bg-amber-500/20 selection:text-amber-300">
       {/* Minimal Glass Navbar */}
       <Navbar />
 
@@ -43,9 +35,6 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Floating Light/Dark Theme Switcher (Cream #FAF8F5 <-> Dark Graphite #1D1D1E) */}
-      <FloatingThemeToggle />
     </div>
   );
 }
