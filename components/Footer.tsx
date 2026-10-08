@@ -3,11 +3,17 @@
 import React from "react";
 import Link from "next/link";
 import { Flame, Snowflake } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Footer() {
+  const { isDark } = useTheme();
 
   return (
-    <footer className="relative w-full bg-[#EFEBE4] dark:bg-[#151516] text-[#141518] dark:text-white border-t border-black/[0.08] dark:border-white/[0.08] py-16 transition-colors duration-500">
+    <footer
+      className={`relative w-full border-t py-16 transition-colors duration-500 ${
+        isDark ? "bg-[#151516] text-white border-white/[0.08]" : "bg-[#FAF8F5] text-[#141518] border-black/[0.08]"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-black/[0.08] dark:border-white/[0.08]">
           {/* Brand Col */}

@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { useTheme } from "@/context/ThemeContext";
 
 interface FeatureMode {
   id: string;
@@ -75,6 +76,7 @@ const MODES: FeatureMode[] = [
 ];
 
 export default function InvisibleArchitectureSection() {
+  const { isDark } = useTheme();
   const [activeMode, setActiveMode] = useState<FeatureMode>(MODES[0]);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -140,33 +142,61 @@ export default function InvisibleArchitectureSection() {
     <section
       id="invisible-architecture"
       ref={containerRef}
-      className="relative w-full py-28 sm:py-36 bg-[#FAF8F5] dark:bg-[#1D1D1E] text-[#141518] dark:text-white overflow-hidden border-t border-black/[0.06] dark:border-white/[0.08] transition-colors duration-500"
+      className={`relative w-full py-28 sm:py-36 overflow-hidden border-t transition-colors duration-500 ${
+        isDark ? "bg-[#1D1D1E] text-white border-white/[0.08]" : "bg-[#FAF8F5] text-[#141518] border-black/[0.06]"
+      }`}
     >
       {/* Background Subtle Warm Radial Glow */}
-      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[180px] opacity-30 bg-gradient-to-r from-amber-200/40 via-orange-200/30 to-sky-200/40" />
+      <div
+        className={`pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[180px] opacity-25 transition-all duration-700 ${
+          isDark ? "bg-amber-400/10" : "bg-amber-300/30"
+        }`}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Clean, Open Typography with NO Boxes */}
         <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-18">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] text-xs font-mono tracking-widest uppercase text-[#141518] dark:text-zinc-200 mb-6 backdrop-blur-md">
+          <div
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-6 backdrop-blur-md transition-colors ${
+              isDark
+                ? "bg-white/[0.05] border border-white/[0.12] text-zinc-200"
+                : "bg-black/[0.04] border border-black/[0.08] text-[#141518]"
+            }`}
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             <span>Section 03 — Invisible Architecture</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#141518] dark:text-white leading-[1.05]">
+          <h2
+            className={`text-4xl sm:text-6xl font-black uppercase tracking-tight leading-[1.05] transition-colors ${
+              isDark ? "text-white" : "text-[#141518]"
+            }`}
+          >
             Engineered to be felt.{" "}
-            <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-sky-600 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
+              }`}
+            >
               Never seen or heard.
             </span>
           </h2>
 
-          <p className="mt-5 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed max-w-2xl mx-auto">
+          <p
+            className={`mt-5 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto transition-colors ${
+              isDark ? "text-zinc-400" : "text-zinc-600"
+            }`}
+          >
             True luxury is the complete absence of noise, drafts, and bulky mechanical grilles. Every
             duct, damper, and hydronic loop is seamlessly concealed within architectural reveals.
           </p>
 
           {/* Minimalist Floating Tabs - Clean pills, NO Cluttered Boxes */}
-          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center sm:inline-flex items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md max-w-full">
+          <div
+            className={`mt-6 sm:mt-8 flex flex-wrap justify-center sm:inline-flex items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-full backdrop-blur-md max-w-full transition-colors ${
+              isDark ? "bg-white/[0.04] border border-white/[0.08]" : "bg-black/[0.04] border border-black/[0.08]"
+            }`}
+          >
             {MODES.map((mode) => {
               const isActive = activeMode.id === mode.id;
               return (
@@ -175,8 +205,12 @@ export default function InvisibleArchitectureSection() {
                   onClick={() => setActiveMode(mode)}
                   className={`px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-xl sm:rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? "bg-[#141518] dark:bg-white text-white dark:text-black font-bold shadow-md shadow-black/10"
-                      : "text-zinc-600 dark:text-zinc-400 hover:text-[#141518] dark:hover:text-white"
+                      ? isDark
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "bg-[#141518] text-white font-bold shadow-md shadow-black/10"
+                      : isDark
+                      ? "text-zinc-400 hover:text-white"
+                      : "text-zinc-600 hover:text-[#141518]"
                   }`}
                 >
                   {mode.title}
@@ -217,12 +251,28 @@ export default function InvisibleArchitectureSection() {
             </div>
 
             {/* Floating Annotation Tag */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-7 sm:top-9 w-48 sm:w-64 p-2.5 sm:p-3 rounded-xl bg-white/95 text-[#141518] border border-black/[0.1] backdrop-blur-md text-left shadow-2xl pointer-events-none">
-              <span className="text-[9px] sm:text-[10px] font-mono text-amber-600 uppercase tracking-widest block font-bold">
+            <div
+              className={`absolute left-1/2 -translate-x-1/2 top-7 sm:top-9 w-48 sm:w-64 p-2.5 sm:p-3 rounded-xl border backdrop-blur-md text-left shadow-2xl pointer-events-none transition-colors ${
+                isDark
+                  ? "bg-[#252528]/95 text-white border-white/[0.12]"
+                  : "bg-white/95 text-[#141518] border-black/[0.1]"
+              }`}
+            >
+              <span
+                className={`text-[9px] sm:text-[10px] font-mono uppercase tracking-widest block font-bold ${
+                  isDark ? "text-amber-400" : "text-amber-600"
+                }`}
+              >
                 CONCEALED DETAIL
               </span>
-              <p className="text-[11px] sm:text-xs font-semibold text-[#141518] mt-0.5">{activeMode.callout.title}</p>
-              <p className="text-[10px] sm:text-[11px] text-zinc-600 mt-0.5 leading-snug font-light">
+              <p className={`text-[11px] sm:text-xs font-semibold mt-0.5 ${isDark ? "text-white" : "text-[#141518]"}`}>
+                {activeMode.callout.title}
+              </p>
+              <p
+                className={`text-[10px] sm:text-[11px] mt-0.5 leading-snug font-light ${
+                  isDark ? "text-zinc-300" : "text-zinc-600"
+                }`}
+              >
                 {activeMode.callout.text}
               </p>
             </div>
@@ -255,41 +305,57 @@ export default function InvisibleArchitectureSection() {
         </div>
 
         {/* Editorial 3-Column Architectural Principles (Clean Text, NO Dark Boxes) */}
-        <div className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 pt-12 border-t border-black/[0.08] dark:border-white/[0.08]">
+        <div
+          className={`mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 pt-12 border-t transition-colors ${
+            isDark ? "border-white/[0.08]" : "border-black/[0.08]"
+          }`}
+        >
           <div className="space-y-2">
-            <span className="text-xs font-mono text-amber-700 dark:text-amber-400 tracking-widest uppercase block font-semibold">
+            <span
+              className={`text-xs font-mono tracking-widest uppercase block font-semibold ${
+                isDark ? "text-amber-400" : "text-amber-700"
+              }`}
+            >
               01 / AESTHETIC PURITY
             </span>
-            <h4 className="text-lg font-bold uppercase tracking-tight text-[#141518] dark:text-white">
+            <h4 className={`text-lg font-bold uppercase tracking-tight ${isDark ? "text-white" : "text-[#141518]"}`}>
               Zero Visible Grilles
             </h4>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+            <p className={`text-sm font-light leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
               Air diffusers are designed in concert with structural expansion joints and cabinetry reveals.
               The mechanical engineering never intrudes on architectural vision.
             </p>
           </div>
 
           <div className="space-y-2">
-            <span className="text-xs font-mono text-sky-700 dark:text-sky-400 tracking-widest uppercase block font-semibold">
+            <span
+              className={`text-xs font-mono tracking-widest uppercase block font-semibold ${
+                isDark ? "text-sky-400" : "text-sky-700"
+              }`}
+            >
               02 / ACOUSTIC FLOOR
             </span>
-            <h4 className="text-lg font-bold uppercase tracking-tight text-[#141518] dark:text-white">
+            <h4 className={`text-lg font-bold uppercase tracking-tight ${isDark ? "text-white" : "text-[#141518]"}`}>
               18 dBA Sound Attenuation
             </h4>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+            <p className={`text-sm font-light leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
               Vibration springs, internal acoustic baffles, and low-velocity plenum ducts keep sound output
               lower than a whispered conversation in an empty library.
             </p>
           </div>
 
           <div className="space-y-2">
-            <span className="text-xs font-mono text-emerald-700 dark:text-emerald-400 tracking-widest uppercase block font-semibold">
+            <span
+              className={`text-xs font-mono tracking-widest uppercase block font-semibold ${
+                isDark ? "text-amber-400" : "text-amber-700"
+              }`}
+            >
               03 / WHOLE-HOME BALANCE
             </span>
-            <h4 className="text-lg font-bold uppercase tracking-tight text-[#141518] dark:text-white">
+            <h4 className={`text-lg font-bold uppercase tracking-tight ${isDark ? "text-white" : "text-[#141518]"}`}>
               ±0.2°F Zone Accuracy
             </h4>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+            <p className={`text-sm font-light leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
               Decentralized micro-sensors and motorized dampers dynamically modulate airflow room-by-room,
               eliminating hot spots across double-height rooms.
             </p>

@@ -14,6 +14,7 @@ import {
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 interface SpatialCardData {
   id: number;
@@ -39,8 +40,8 @@ const CARDS: SpatialCardData[] = [
     description:
       "Precision cutaway reveals hidden insulated supply trunks and returns. The system independently balances sub-zero winter temperatures on one elevation while delivering radiant chilled air on the other.",
     image: "/introduction/card_01_villa.jpg",
-    color: "from-amber-500/25 via-orange-500/10 to-transparent",
-    glowColor: "rgba(245, 158, 11, 0.4)",
+    color: "from-amber-500/25 via-amber-600/10 to-transparent",
+    glowColor: "rgba(217, 119, 6, 0.35)",
     icon: Layers,
     stats: [
       { label: "AIR CHANNELS", value: "Dual Insulated" },
@@ -56,8 +57,8 @@ const CARDS: SpatialCardData[] = [
     description:
       "Aero-acoustic sound baffles absorb resonance before air enters the living envelope. High-velocity air currents travel through double-insulated plenum channels without vibration or audible turbulence.",
     image: "/introduction/card_02_acoustic.jpg",
-    color: "from-emerald-500/25 via-teal-500/10 to-transparent",
-    glowColor: "rgba(16, 185, 129, 0.4)",
+    color: "from-sky-500/25 via-sky-600/10 to-transparent",
+    glowColor: "rgba(14, 165, 233, 0.35)",
     icon: Wind,
     stats: [
       { label: "SOUND PROFILE", value: "18 dBA Whisper" },
@@ -73,8 +74,8 @@ const CARDS: SpatialCardData[] = [
     description:
       "Twin-rotary neodymium inverter compressors modulate down to 10% minimal capacity. Microsecond telemetry matches heat gain and loss in real-time, delivering 64% lower consumption than standard staged pumps.",
     image: "/introduction/card_03_machine.jpg",
-    color: "from-sky-500/25 via-blue-500/10 to-transparent",
-    glowColor: "rgba(14, 165, 233, 0.4)",
+    color: "from-sky-500/25 via-sky-600/10 to-transparent",
+    glowColor: "rgba(14, 165, 233, 0.35)",
     icon: Cpu,
     stats: [
       { label: "EFFICIENCY", value: "22.5 SEER2" },
@@ -90,8 +91,8 @@ const CARDS: SpatialCardData[] = [
     description:
       "Underfloor cross-linked PEX-a oxygen-barrier loops heat the architectural slab directly. Warmth rises silently through hardwood and polished stone, counteracting winter exterior cold glass draft cascades.",
     image: "/introduction/card_04_radiant.jpg",
-    color: "from-amber-500/25 via-red-500/10 to-transparent",
-    glowColor: "rgba(234, 88, 12, 0.4)",
+    color: "from-amber-500/25 via-amber-600/10 to-transparent",
+    glowColor: "rgba(217, 119, 6, 0.35)",
     icon: Flame,
     stats: [
       { label: "LOOP NETWORK", value: "12 Radiant Zones" },
@@ -107,8 +108,8 @@ const CARDS: SpatialCardData[] = [
     description:
       "High-induction linear ceiling diffusers sweep fresh oxygen through open-concept living volumes. Hospital-grade MERV 16 filtration captures 99.97% of airborne particulate without reducing airflow velocity.",
     image: "/introduction/card_05_airflow.jpg",
-    color: "from-teal-500/25 via-sky-500/10 to-transparent",
-    glowColor: "rgba(20, 184, 166, 0.4)",
+    color: "from-sky-500/25 via-sky-600/10 to-transparent",
+    glowColor: "rgba(14, 165, 233, 0.35)",
     icon: Snowflake,
     stats: [
       { label: "CFM DELIVERY", value: "1,250 CFM" },
@@ -124,8 +125,8 @@ const CARDS: SpatialCardData[] = [
     description:
       "From sub-zero mountain blizzards to 105°F summer heatwaves, the entire villa transitions effortlessly between cooling and heating modes, maintaining uninterrupted comfort and interior serenity.",
     image: "/introduction/card_06_equilibrium.jpg",
-    color: "from-purple-500/25 via-indigo-500/10 to-transparent",
-    glowColor: "rgba(168, 85, 247, 0.4)",
+    color: "from-amber-500/25 via-amber-600/10 to-transparent",
+    glowColor: "rgba(217, 119, 6, 0.35)",
     icon: ShieldCheck,
     stats: [
       { label: "YEAR-ROUND", value: "72°F Fixed" },
@@ -135,6 +136,7 @@ const CARDS: SpatialCardData[] = [
 ];
 
 export default function IntroductionSection() {
+  const { isDark } = useTheme();
   const [continuousIndex, setContinuousIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [mouseTilt, setMouseTilt] = useState({ x: 0, y: 0 });
@@ -174,11 +176,9 @@ export default function IntroductionSection() {
       vx: (Math.random() - 0.5) * 0.35,
       vy: (Math.random() - 0.5) * 0.35,
       color:
-        Math.random() > 0.6
-          ? "rgba(56, 189, 248, " // Sky blue
-          : Math.random() > 0.3
-          ? "rgba(245, 158, 11, " // Amber
-          : "rgba(168, 85, 247, ", // Violet
+        Math.random() > 0.5
+          ? "rgba(14, 165, 233, " // Subzero Glacier Sky
+          : "rgba(217, 119, 6, ", // Warm Architectural Amber
       alpha: Math.random() * 0.5 + 0.15,
     }));
 
@@ -276,7 +276,9 @@ export default function IntroductionSection() {
     <section
       ref={sectionRef}
       id="introduction"
-      className="relative w-full bg-[#FAF8F5] dark:bg-[#1D1D1E] text-[#141518] dark:text-white border-t border-black/[0.06] dark:border-white/[0.08] select-none transition-colors duration-500"
+      className={`relative w-full border-t select-none transition-colors duration-500 ${
+        isDark ? "bg-[#1D1D1E] text-white border-white/[0.08]" : "bg-[#FAF8F5] text-[#141518] border-black/[0.06]"
+      }`}
     >
       {/* Pinned Viewport Container */}
       <div
@@ -295,16 +297,30 @@ export default function IntroductionSection() {
 
         {/* Header (Top) */}
         <div className="relative z-10 text-center max-w-3xl mx-auto pt-2 sm:pt-4">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#141518] dark:text-zinc-200 mb-2 sm:mb-3 backdrop-blur-md">
+          <div
+            className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-xs font-mono uppercase tracking-widest mb-2 sm:mb-3 backdrop-blur-md transition-colors ${
+              isDark ? "bg-white/[0.05] border-white/[0.12] text-zinc-200" : "bg-black/[0.04] border-black/[0.08] text-[#141518]"
+            }`}
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             <span>Spatial Architecture</span>
-            <span className="text-zinc-400 dark:text-zinc-500 hidden sm:inline">|</span>
-            <span className="text-sky-600 dark:text-sky-400 font-semibold hidden sm:inline">Scroll Down To Advance</span>
+            <span className={isDark ? "text-zinc-500 hidden sm:inline" : "text-zinc-400 hidden sm:inline"}>|</span>
+            <span className={`${isDark ? "text-sky-400" : "text-sky-600"} font-semibold hidden sm:inline`}>
+              Scroll Down To Advance
+            </span>
           </div>
 
-          <h2 className="text-xl sm:text-3xl lg:text-5xl font-black uppercase tracking-tight text-[#141518] dark:text-white leading-tight">
+          <h2
+            className={`text-xl sm:text-3xl lg:text-5xl font-black uppercase tracking-tight leading-tight transition-colors ${
+              isDark ? "text-white" : "text-[#141518]"
+            }`}
+          >
             Explore The Spatial{" "}
-            <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-sky-600 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
+              }`}
+            >
               Climate Universe.
             </span>
           </h2>
@@ -433,7 +449,7 @@ export default function IntroductionSection() {
                     <h3 className="text-xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
                       {card.title}
                     </h3>
-                    <p className="mt-0.5 sm:mt-1 text-xs sm:text-lg font-bold bg-gradient-to-r from-amber-300 via-orange-300 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+                    <p className="mt-0.5 sm:mt-1 text-xs sm:text-lg font-bold bg-gradient-to-r from-amber-300 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
                       {card.subtitle}
                     </p>
                     <p className="mt-1.5 sm:mt-2.5 text-[11px] sm:text-sm text-zinc-200 line-clamp-2 sm:line-clamp-3 md:line-clamp-none max-w-xl font-medium leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
@@ -488,8 +504,10 @@ export default function IntroductionSection() {
                 onClick={() => scrollToCard(dotIdx)}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   dotIdx === activeIndex
-                    ? "w-8 bg-gradient-to-r from-amber-600 to-orange-600 shadow-sm"
-                    : "w-2 bg-black/15 dark:bg-white/20 hover:bg-black/35 dark:hover:bg-white/40"
+                    ? "w-8 bg-amber-500 shadow-sm"
+                    : isDark
+                    ? "w-2 bg-white/20 hover:bg-white/40"
+                    : "w-2 bg-black/15 hover:bg-black/35"
                 }`}
                 aria-label={`Scroll to card ${dotIdx + 1}`}
               />
@@ -497,14 +515,22 @@ export default function IntroductionSection() {
           </div>
 
           {/* Current Step Label */}
-          <span className="text-xs font-mono text-zinc-600 dark:text-zinc-300 uppercase tracking-widest font-semibold">
+          <span
+            className={`text-xs font-mono uppercase tracking-widest font-semibold transition-colors ${
+              isDark ? "text-zinc-300" : "text-zinc-600"
+            }`}
+          >
             0{activeIndex + 1} / 0{CARDS.length} — {CARDS[activeIndex].title}
           </span>
 
           {/* Scroll Prompt with Animated Arrow */}
-          <div className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 tracking-wider uppercase animate-bounce pt-0.5">
+          <div
+            className={`flex items-center gap-1.5 text-[11px] font-mono tracking-wider uppercase animate-bounce pt-0.5 transition-colors ${
+              isDark ? "text-zinc-400" : "text-zinc-500"
+            }`}
+          >
             <span>Scroll To Advance Cards</span>
-            <ChevronDown className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <ChevronDown className={`w-3.5 h-3.5 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
           </div>
         </div>
       </div>

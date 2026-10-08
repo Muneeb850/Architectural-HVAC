@@ -278,11 +278,16 @@ export default function CinematicScrollEngine() {
     if (!st) return;
 
     const targetScroll = st.start + (chapter.start + 0.02) * (st.end - st.start);
-    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    if (typeof window !== "undefined" && (window as unknown as { lenis?: { scrollTo: (t: number, opts?: unknown) => void } }).lenis) {
+      (window as unknown as { lenis: { scrollTo: (t: number, opts?: unknown) => void } }).lenis.scrollTo(targetScroll, { duration: 1 });
+    } else {
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    }
   };
 
   // Toggle Video Playback Mode (Cinematic Movie Experience)
-  const toggleVideoPlayback = () => {
+  const toggleVideoPlayback = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
 
@@ -291,7 +296,11 @@ export default function CinematicScrollEngine() {
       setIsPlayingVideo(false);
     } else {
       setIsPlayingVideo(true);
-      video.play().catch(() => setIsPlayingVideo(false));
+      video.currentTime = 0;
+      video.play().catch((err) => {
+        console.error("Video playback prevented:", err);
+        setIsPlayingVideo(false);
+      });
     }
   };
 
@@ -328,9 +337,11 @@ export default function CinematicScrollEngine() {
           src="/hero-video.mp4"
           playsInline
           muted
+          loop
           preload="auto"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-            isPlayingVideo ? "opacity-100" : "opacity-0 pointer-events-none"
+          onClick={() => toggleVideoPlayback()}
+          className={`absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-500 cursor-pointer ${
+            isPlayingVideo ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
           onEnded={() => setIsPlayingVideo(false)}
         />
@@ -360,12 +371,6 @@ export default function CinematicScrollEngine() {
             opacity: activeChapterIndex < 4 ? 0.45 : 0.25,
           }}
         />
-        <div
-          className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[180px] opacity-20"
-          style={{
-            background: "radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%)",
-          }}
-        />
 
         {/* ========================================================
             NARRATIVE OVERLAYS (SYNCHRONIZED BY CHAPTER THRESHOLDS)
@@ -375,25 +380,25 @@ export default function CinematicScrollEngine() {
             ACT 01: HERO OPENING
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 transition-all duration-500 ${
             activeChapterIndex === 0
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-12 pointer-events-none"
+              ? "opacity-100 translate-y-0 z-20 pointer-events-auto"
+              : "opacity-0 -translate-y-12 pointer-events-none invisible z-0"
           }`}
         >
-          <div className="max-w-4xl mx-auto flex flex-col items-center pointer-events-auto">
+          <div className="max-w-4xl mx-auto flex flex-col items-center">
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/75 border border-white/20 text-[10px] sm:text-xs font-mono tracking-widest uppercase text-amber-300 mb-5 sm:mb-6 backdrop-blur-md shadow-lg shadow-black/80 font-semibold max-w-full truncate">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
               <span className="truncate">Architectural Climate Engineering</span>
               <span className="text-zinc-500 hidden sm:inline">|</span>
-              <span className="text-emerald-400 font-bold hidden sm:inline">2.5K Ultra-Sharp</span>
+              <span className="text-amber-400 font-bold hidden sm:inline">2.5K Ultra-Sharp</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               <span className="block tracking-tight text-white">COMFORT,</span>
-              <span className="block mt-1 bg-gradient-to-r from-amber-200 via-orange-400 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(245,158,11,0.5)]">
+              <span className="block mt-1 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(245,158,11,0.5)]">
                 ENGINEERED.
               </span>
             </h1>
@@ -404,10 +409,11 @@ export default function CinematicScrollEngine() {
             </p>
 
             {/* CTAs & Controls */}
-            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 relative z-30">
               <button
+                type="button"
                 onClick={toggleVideoPlayback}
-                className="group inline-flex items-center gap-2 sm:gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black text-[11px] sm:text-xs font-bold tracking-wider uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 cursor-pointer"
+                className="group relative z-30 inline-flex items-center gap-2 sm:gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black text-[11px] sm:text-xs font-bold tracking-wider uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 cursor-pointer active:scale-95"
               >
                 {isPlayingVideo ? (
                   <>
@@ -423,8 +429,9 @@ export default function CinematicScrollEngine() {
               </button>
 
               <button
+                type="button"
                 onClick={() => jumpToChapter(CHAPTERS[1])}
-                className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-black/60 border border-white/20 text-white text-[11px] sm:text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition-colors backdrop-blur-md cursor-pointer shadow-lg"
+                className="relative z-30 inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-black/60 border border-white/20 text-white text-[11px] sm:text-xs font-semibold tracking-wider uppercase hover:bg-white/10 transition-colors backdrop-blur-md cursor-pointer shadow-lg active:scale-95"
               >
                 <span>Scroll To Explore</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -432,7 +439,10 @@ export default function CinematicScrollEngine() {
             </div>
 
             {/* Scroll Indicator */}
-            <div className="mt-8 sm:mt-12 flex flex-col items-center gap-1 text-zinc-300 font-mono text-[10px] sm:text-[11px] tracking-widest uppercase animate-bounce drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+            <div
+              onClick={() => jumpToChapter(CHAPTERS[1])}
+              className="mt-8 sm:mt-12 flex flex-col items-center gap-1 text-zinc-300 font-mono text-[10px] sm:text-[11px] tracking-widest uppercase animate-bounce drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] cursor-pointer"
+            >
               <span>Scroll To Explore Architecture</span>
               <ChevronDown className="w-3.5 h-3.5 text-amber-400" />
             </div>
@@ -443,15 +453,15 @@ export default function CinematicScrollEngine() {
             ACT 02: SECTION 02 — THE STRUCTURAL CUTAWAY
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 transition-all duration-500 ${
             activeChapterIndex === 1
-              ? "opacity-100 translate-x-0"
+              ? "opacity-100 translate-x-0 z-20 pointer-events-auto"
               : activeChapterIndex < 1
-              ? "opacity-0 translate-x-12"
-              : "opacity-0 -translate-x-12"
+              ? "opacity-0 translate-x-12 pointer-events-none invisible z-0"
+              : "opacity-0 -translate-x-12 pointer-events-none invisible z-0"
           }`}
         >
-          <div className="max-w-xl pointer-events-auto">
+          <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-amber-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
               <Layers className="w-3.5 h-3.5 text-amber-400" />
               <span>Section 02 — The Structural Cutaway</span>
@@ -461,7 +471,7 @@ export default function CinematicScrollEngine() {
               Comfort doesn&apos;t start at the thermostat.
             </h2>
 
-            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               It starts behind the walls.
             </p>
 
@@ -475,17 +485,17 @@ export default function CinematicScrollEngine() {
             ACT 03: SECTION 03 — THE AIRFLOW STORY
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 transition-all duration-500 ${
             activeChapterIndex === 2
-              ? "opacity-100 translate-y-0"
+              ? "opacity-100 translate-y-0 z-20 pointer-events-auto"
               : activeChapterIndex < 2
-              ? "opacity-0 translate-y-12"
-              : "opacity-0 -translate-y-12"
+              ? "opacity-0 translate-y-12 pointer-events-none invisible z-0"
+              : "opacity-0 -translate-y-12 pointer-events-none invisible z-0"
           }`}
         >
-          <div className="max-w-xl text-left sm:text-right pointer-events-auto flex flex-col items-start sm:items-end">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-emerald-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
-              <Wind className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="max-w-xl text-left sm:text-right flex flex-col items-start sm:items-end">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-sky-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
+              <Wind className="w-3.5 h-3.5 text-sky-400" />
               <span>Section 03 — Airflow Dynamics</span>
             </div>
 
@@ -493,7 +503,7 @@ export default function CinematicScrollEngine() {
               Air should move with purpose.
             </h2>
 
-            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold text-emerald-300 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold text-sky-300 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               Laminar circulation without turbulence or drafts.
             </p>
 
@@ -507,15 +517,15 @@ export default function CinematicScrollEngine() {
             ACT 04: SECTION 04 — THE HIDDEN MACHINE
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 transition-all duration-500 ${
             activeChapterIndex === 3
-              ? "opacity-100 translate-y-0"
+              ? "opacity-100 translate-y-0 z-20 pointer-events-auto"
               : activeChapterIndex < 3
-              ? "opacity-0 translate-y-12"
-              : "opacity-0 -translate-y-12"
+              ? "opacity-0 translate-y-12 pointer-events-none invisible z-0"
+              : "opacity-0 -translate-y-12 pointer-events-none invisible z-0"
           }`}
         >
-          <div className="max-w-xl pointer-events-auto">
+          <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-sky-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
               <Cpu className="w-3.5 h-3.5 text-sky-400" />
               <span>Section 04 — Technical Mechanical Core</span>
@@ -539,15 +549,15 @@ export default function CinematicScrollEngine() {
             ACT 05: SECTION 05 — VILLA MORPH & SEASONS
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-end lg:justify-center items-start sm:items-end px-5 sm:px-12 lg:px-20 pb-20 sm:pb-24 lg:pb-0 transition-all duration-500 ${
             activeChapterIndex === 4
-              ? "opacity-100 translate-x-0"
+              ? "opacity-100 translate-x-0 z-20 pointer-events-auto"
               : activeChapterIndex < 4
-              ? "opacity-0 translate-x-12"
-              : "opacity-0 -translate-x-12"
+              ? "opacity-0 translate-x-12 pointer-events-none invisible z-0"
+              : "opacity-0 -translate-x-12 pointer-events-none invisible z-0"
           }`}
         >
-          <div className="max-w-xl text-left sm:text-right pointer-events-auto flex flex-col items-start sm:items-end">
+          <div className="max-w-xl text-left sm:text-right flex flex-col items-start sm:items-end">
             <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-amber-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
               <span>Section 05 — The Morphing Transformation</span>
@@ -557,7 +567,7 @@ export default function CinematicScrollEngine() {
               One system. Every season.
             </h2>
 
-            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold bg-gradient-to-r from-amber-300 via-sky-200 to-sky-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <p className="mt-2 sm:mt-3 text-base sm:text-2xl font-bold bg-gradient-to-r from-amber-300 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               Designed to maintain comfort as the world outside changes.
             </p>
 
@@ -571,20 +581,20 @@ export default function CinematicScrollEngine() {
             ACT 06: SECTION 09 — THE FINAL REVEAL
         -------------------------------------------------------- */}
         <div
-          className={`absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 pointer-events-none transition-all duration-500 ${
+          className={`absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-6 transition-all duration-500 ${
             activeChapterIndex === 5
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-12"
+              ? "opacity-100 translate-y-0 z-20 pointer-events-auto"
+              : "opacity-0 translate-y-12 pointer-events-none invisible z-0"
           }`}
         >
-          <div className="max-w-3xl mx-auto flex flex-col items-center pointer-events-auto">
+          <div className="max-w-3xl mx-auto flex flex-col items-center">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-4 sm:mb-5 backdrop-blur-md drop-shadow-md">
               <span>Act 06 — Complete Architectural Integration</span>
             </div>
 
             <h2 className="text-3xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               See the difference.{" "}
-              <span className="block mt-1 sm:mt-2 bg-gradient-to-r from-amber-300 via-emerald-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(16,185,129,0.5)]">
+              <span className="block mt-1 sm:mt-2 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(245,158,11,0.5)]">
                 Feel the comfort.
               </span>
             </h2>
@@ -593,9 +603,9 @@ export default function CinematicScrollEngine() {
               From foundation to roofline, intelligent engineering transforms invisible air into seamless living luxury.
             </p>
 
-            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 relative z-30">
               <a
-                href="#engineering"
+                href="#seasons"
                 className="px-5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white text-black text-[11px] sm:text-xs font-bold tracking-wider uppercase hover:bg-zinc-200 transition-colors shadow-xl shadow-white/10"
               >
                 Inspect Engineering Specs

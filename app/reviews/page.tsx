@@ -141,7 +141,11 @@ export default function ReviewsPage() {
             }`}
           >
             Trusted by architects.{" "}
-            <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-sky-500 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
+              }`}
+            >
               Felt by owners.
             </span>
           </h1>

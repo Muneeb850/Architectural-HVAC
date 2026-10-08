@@ -77,7 +77,11 @@ export default function ContactPage() {
             }`}
           >
             Get in touch.{" "}
-            <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-sky-600 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
+              }`}
+            >
               Start your project.
             </span>
           </h1>

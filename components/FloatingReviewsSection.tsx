@@ -133,7 +133,11 @@ export default function FloatingReviewsSection() {
             }`}
           >
             Trusted by architects.{" "}
-            <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-sky-500 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
+              }`}
+            >
               Felt by owners.
             </span>
           </h2>
@@ -183,10 +187,12 @@ export default function FloatingReviewsSection() {
 
         {/* Floating Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
-          {filteredReviews.map((rev) => (
+          {filteredReviews.map((rev, index) => (
             <div
               key={rev.id}
-              className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-500 flex flex-col justify-between hover:-translate-y-1.5 ${
+              className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-500 flex-col justify-between hover:-translate-y-1.5 ${
+                index >= 4 ? "hidden md:flex" : "flex"
+              } ${
                 isDark
                   ? "bg-[#252528]/80 border-white/[0.1] hover:border-white/[0.25] hover:bg-[#28282C] shadow-2xl shadow-black/40"
                   : "bg-white/90 border-black/[0.08] hover:border-black/[0.18] hover:bg-white shadow-xl shadow-black/[0.04]"

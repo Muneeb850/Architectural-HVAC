@@ -137,7 +137,11 @@ export default function ArchitecturePage() {
             }`}
           >
             The invisible architecture of{" "}
-            <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-sky-500 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
+              }`}
+            >
               thermal equilibrium.
             </span>
           </h1>
@@ -303,32 +307,32 @@ export default function ArchitecturePage() {
               <tr>
                 <td className="p-4 sm:p-5 font-semibold">Visible Hardware</td>
                 <td className="p-4 sm:p-5 text-zinc-500">Exposed 4x10 & 6x12 ceiling stamped grilles</td>
-                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">0 Visible Supply Grilles (12mm reveals)</td>
+                <td className="p-4 sm:p-5 font-bold text-amber-500 bg-amber-500/5">0 Visible Supply Grilles (12mm reveals)</td>
               </tr>
               <tr>
                 <td className="p-4 sm:p-5 font-semibold">Sound Profile (Noise Floor)</td>
                 <td className="p-4 sm:p-5 text-zinc-500">32 – 44 dBA (Audible fan rush & duct roar)</td>
-                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">&lt; 18 dBA Certified Whisper Floor</td>
+                <td className="p-4 sm:p-5 font-bold text-amber-500 bg-amber-500/5">&lt; 18 dBA Certified Whisper Floor</td>
               </tr>
               <tr>
                 <td className="p-4 sm:p-5 font-semibold">Room-to-Room Delta</td>
                 <td className="p-4 sm:p-5 text-zinc-500">±3.5°F to 5.0°F hot/cold spots across double-height glass</td>
-                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">±0.2°F Room-to-Room Precision Equilibrium</td>
+                <td className="p-4 sm:p-5 font-bold text-amber-500 bg-amber-500/5">±0.2°F Room-to-Room Precision Equilibrium</td>
               </tr>
               <tr>
                 <td className="p-4 sm:p-5 font-semibold">Sub-Zero Heat Capacity</td>
                 <td className="p-4 sm:p-5 text-zinc-500">Derates below 25°F; triggers expensive heat strips</td>
-                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">100% Heating Output Down to -22°F</td>
+                <td className="p-4 sm:p-5 font-bold text-amber-500 bg-amber-500/5">100% Heating Output Down to -22°F</td>
               </tr>
               <tr>
                 <td className="p-4 sm:p-5 font-semibold">Slab Radiant Synergy</td>
                 <td className="p-4 sm:p-5 text-zinc-500">Separate system requiring separate contractor coordination</td>
-                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">Unified Hydronic + Inverter Architecture</td>
+                <td className="p-4 sm:p-5 font-bold text-amber-500 bg-amber-500/5">Unified Hydronic + Inverter Architecture</td>
               </tr>
               <tr>
                 <td className="p-4 sm:p-5 font-semibold">Air Purification</td>
                 <td className="p-4 sm:p-5 text-zinc-500">Standard MERV 8 fiberglass filters</td>
-                <td className="p-4 sm:p-5 font-bold text-emerald-500 bg-amber-500/5">MERV 16 Hospital-Grade + Energy Recovery ERV</td>
+                <td className="p-4 sm:p-5 font-bold text-amber-500 bg-amber-500/5">MERV 16 Hospital-Grade + Energy Recovery ERV</td>
               </tr>
             </tbody>
           </table>

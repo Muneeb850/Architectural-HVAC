@@ -3,8 +3,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Flame, Snowflake, Sun, CloudSnow, ArrowLeftRight } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function SeasonTransformationSection() {
+  const { isDark } = useTheme();
   const [sliderPos, setSliderPos] = useState<number>(50); // percentage 0 to 100
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -36,34 +38,63 @@ export default function SeasonTransformationSection() {
   };
 
   return (
-    <section id="seasons" className="relative w-full py-28 bg-[#FAF8F5] dark:bg-[#1D1D1E] text-[#141518] dark:text-white overflow-hidden border-t border-black/[0.06] dark:border-white/[0.08] transition-colors duration-500">
+    <section
+      id="seasons"
+      className={`relative w-full py-28 overflow-hidden border-t transition-colors duration-500 ${
+        isDark ? "bg-[#1D1D1E] text-white border-white/[0.08]" : "bg-[#FAF8F5] text-[#141518] border-black/[0.06]"
+      }`}
+    >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] text-xs font-mono tracking-widest uppercase text-[#141518] dark:text-zinc-200 mb-4 backdrop-blur-md">
+          <div
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase mb-4 backdrop-blur-md transition-colors ${
+              isDark
+                ? "bg-white/[0.05] border border-white/[0.12] text-zinc-200"
+                : "bg-black/[0.04] border border-black/[0.08] text-[#141518]"
+            }`}
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             <span>Section 04 — Seasonal Equilibrium</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#141518] dark:text-white leading-tight">
+          <h2
+            className={`text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight transition-colors ${
+              isDark ? "text-white" : "text-[#141518]"
+            }`}
+          >
             One System.{" "}
-            <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-sky-600 bg-clip-text text-transparent">
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark ? "from-amber-300 to-amber-100" : "from-amber-600 to-amber-700"
+              }`}
+            >
               Every Season.
             </span>
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+          <p
+            className={`mt-4 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto transition-colors ${
+              isDark ? "text-zinc-400" : "text-zinc-600"
+            }`}
+          >
             Designed to maintain comfort as the world outside changes. The architecture remains rock solid while the internal thermodynamics adapt instantly to sub-zero blizzards or scorching heatwaves.
           </p>
 
           {/* Preset Buttons */}
-          <div className="mt-6 sm:mt-8 flex flex-wrap sm:flex-nowrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-xl bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md max-w-full">
+          <div
+            className={`mt-6 sm:mt-8 flex flex-wrap sm:flex-nowrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-xl backdrop-blur-md max-w-full transition-colors ${
+              isDark ? "bg-white/[0.04] border border-white/[0.08]" : "bg-black/[0.04] border border-black/[0.08]"
+            }`}
+          >
             <button
               onClick={() => setSliderPos(20)}
               className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos < 35
-                  ? "bg-orange-600 text-white font-bold shadow-md shadow-orange-600/20"
-                  : "text-zinc-600 dark:text-zinc-400 hover:text-[#141518] dark:hover:text-white"
+                  ? "bg-amber-600 text-white font-bold shadow-md shadow-amber-600/20"
+                  : isDark
+                  ? "text-zinc-400 hover:text-white"
+                  : "text-zinc-600 hover:text-[#141518]"
               }`}
             >
               <Flame className="w-3.5 h-3.5" />
@@ -73,8 +104,12 @@ export default function SeasonTransformationSection() {
               onClick={() => setSliderPos(50)}
               className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos >= 35 && sliderPos <= 65
-                  ? "bg-[#141518] dark:bg-white text-white dark:text-black font-bold shadow-md"
-                  : "text-zinc-600 dark:text-zinc-400 hover:text-[#141518] dark:hover:text-white"
+                  ? isDark
+                    ? "bg-white text-black font-bold shadow-md"
+                    : "bg-[#141518] text-white font-bold shadow-md shadow-black/10"
+                  : isDark
+                  ? "text-zinc-400 hover:text-white"
+                  : "text-zinc-600 hover:text-[#141518]"
               }`}
             >
               <ArrowLeftRight className="w-3.5 h-3.5" />
@@ -85,7 +120,9 @@ export default function SeasonTransformationSection() {
               className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos > 65
                   ? "bg-sky-600 text-white font-bold shadow-md shadow-sky-600/20"
-                  : "text-zinc-600 dark:text-zinc-400 hover:text-[#141518] dark:hover:text-white"
+                  : isDark
+                  ? "text-zinc-400 hover:text-white"
+                  : "text-zinc-600 hover:text-[#141518]"
               }`}
             >
               <Snowflake className="w-3.5 h-3.5" />
