@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { Flame, Snowflake } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Footer() {
@@ -20,10 +19,9 @@ export default function Footer() {
           <div className="md:col-span-4 space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-white dark:bg-[#252528] border border-black/[0.1] dark:border-white/[0.12] shadow-sm overflow-hidden">
-                <div className="flex items-center">
-                  <Flame className="w-3.5 h-3.5 text-amber-500 -mr-0.5" />
-                  <Snowflake className="w-3.5 h-3.5 text-sky-500" />
-                </div>
+                <span className="font-mono text-xs font-black tracking-tighter text-amber-500 select-none">
+                  A<span className={isDark ? "text-zinc-400" : "text-zinc-500"}>|</span>C
+                </span>
               </div>
               <span className="text-base font-bold tracking-tight text-[#141518] dark:text-white font-mono">
                 AERO<span className="text-amber-500">|</span>CLIMATE

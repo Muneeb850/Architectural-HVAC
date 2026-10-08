@@ -5,9 +5,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  Wind,
-  Cpu,
-  Layers,
   ChevronDown,
   Play,
   Pause,
@@ -463,7 +460,7 @@ export default function CinematicScrollEngine() {
         >
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-amber-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
-              <Layers className="w-3.5 h-3.5 text-amber-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
               <span>Section 02 — The Structural Cutaway</span>
             </div>
 
@@ -495,7 +492,7 @@ export default function CinematicScrollEngine() {
         >
           <div className="max-w-xl text-left sm:text-right flex flex-col items-start sm:items-end">
             <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-sky-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
-              <Wind className="w-3.5 h-3.5 text-sky-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
               <span>Section 03 — Airflow Dynamics</span>
             </div>
 
@@ -527,7 +524,7 @@ export default function CinematicScrollEngine() {
         >
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/20 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-sky-300 font-bold mb-3 sm:mb-4 backdrop-blur-md drop-shadow-md">
-              <Cpu className="w-3.5 h-3.5 text-sky-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
               <span>Section 04 — Technical Mechanical Core</span>
             </div>
 

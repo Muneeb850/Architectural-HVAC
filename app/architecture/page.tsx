@@ -7,13 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingThemeToggle from "@/components/FloatingThemeToggle";
 import { useTheme } from "@/context/ThemeContext";
-import {
-  Wind,
-  Flame,
-  VolumeX,
-  Cpu,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface Pillar {
   id: string;
@@ -24,7 +18,6 @@ interface Pillar {
   image: string;
   stat: string;
   statLabel: string;
-  icon: React.ElementType;
   specs: { label: string; value: string }[];
 }
 
@@ -39,7 +32,6 @@ const PILLARS: Pillar[] = [
     image: "/introduction/card_05_airflow.jpg",
     stat: "1,250 CFM",
     statLabel: "Silent Air Delivery",
-    icon: Wind,
     specs: [
       { label: "SLOT REVEAL WIDTH", value: "12 mm (0.47 in)" },
       { label: "AIR VELOCITY", value: "< 25 FPM (Zero-Draft)" },
@@ -57,7 +49,6 @@ const PILLARS: Pillar[] = [
     image: "/introduction/card_04_radiant.jpg",
     stat: "74.0°F",
     statLabel: "Slab Equilibrium",
-    icon: Flame,
     specs: [
       { label: "NETWORK TOPOLOGY", value: "12 Independent Radiant Zones" },
       { label: "WATER TEMPERATURE", value: "85°F Low-Temp Supply" },
@@ -75,7 +66,6 @@ const PILLARS: Pillar[] = [
     image: "/introduction/card_02_acoustic.jpg",
     stat: "16.5 dBA",
     statLabel: "Operating Sound Floor",
-    icon: VolumeX,
     specs: [
       { label: "SOUND PROFILE", value: "16.5 dBA Certified (NC-15)" },
       { label: "VIBRATION ISOLATION", value: "Neoprene & Steel Spring Mounts" },
@@ -93,7 +83,6 @@ const PILLARS: Pillar[] = [
     image: "/introduction/card_03_machine.jpg",
     stat: "22.5 SEER2",
     statLabel: "Seasonal Efficiency",
-    icon: Cpu,
     specs: [
       { label: "MODULATION RATIO", value: "10% to 100% Microsecond Dynamic" },
       { label: "COLD-CLIMATE FLOOR", value: "-22°F Operational Threshold" },

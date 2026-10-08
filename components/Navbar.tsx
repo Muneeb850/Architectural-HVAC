@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Flame, Snowflake, Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 const NAV_ITEMS = [
@@ -55,10 +55,9 @@ export default function Navbar() {
                 : "bg-white border-black/[0.1] group-hover:border-black/[0.2] shadow-sm"
             }`}
           >
-            <div className="flex items-center">
-              <Flame className="w-3.5 h-3.5 text-amber-500 -mr-0.5" />
-              <Snowflake className="w-3.5 h-3.5 text-sky-500" />
-            </div>
+            <span className="font-mono text-xs font-black tracking-tighter text-amber-500 select-none">
+              A<span className={isHeroDark || isDark ? "text-zinc-400" : "text-zinc-500"}>|</span>C
+            </span>
           </div>
           <div className="flex flex-col">
             <span

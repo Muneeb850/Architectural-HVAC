@@ -5,15 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingThemeToggle from "@/components/FloatingThemeToggle";
 import { useTheme } from "@/context/ThemeContext";
-import {
-  PhoneCall,
-  Mail,
-  MapPin,
-  Clock,
-  ArrowRight,
-  CheckCircle2,
-  Send,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function ContactPage() {
   const { isDark } = useTheme();
@@ -111,8 +103,8 @@ export default function ContactPage() {
             >
               {isSubmitted ? (
                 <div className="py-12 text-center animate-in fade-in duration-500">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6 text-emerald-500">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6 text-emerald-500 font-mono text-base font-bold uppercase tracking-wider">
+                    OK
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mb-3">
                     Message Received
@@ -260,11 +252,7 @@ export default function ContactPage() {
                     }`}
                   >
                     <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
-                    {isSubmitting ? (
-                      <Send className="w-3.5 h-3.5 animate-pulse" />
-                    ) : (
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    )}
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </form>
               )}
@@ -281,7 +269,7 @@ export default function ContactPage() {
               }`}
             >
               <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-amber-600 dark:text-amber-400 font-bold mb-4">
-                <MapPin className="w-3.5 h-3.5" />
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
                 <span>Fabrication & Studio HQ</span>
               </div>
 
@@ -300,7 +288,7 @@ export default function ContactPage() {
 
               <div className="space-y-4 pt-5 border-t border-black/[0.08] dark:border-white/[0.08]">
                 <div className="flex items-start gap-3">
-                  <PhoneCall className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
                   <div>
                     <span className="text-[10px] font-mono uppercase text-zinc-500 block">Telephone</span>
                     <a
@@ -313,7 +301,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
                   <div>
                     <span className="text-[10px] font-mono uppercase text-zinc-500 block">Direct Email</span>
                     <a
@@ -326,7 +314,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
                   <div>
                     <span className="text-[10px] font-mono uppercase text-zinc-500 block">Studio Hours</span>
                     <span className="text-xs font-mono">Mon–Fri: 08:00 – 18:00 Mountain</span>

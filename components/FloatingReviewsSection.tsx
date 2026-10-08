@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Star, CheckCircle2, Quote } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 interface Review {
@@ -199,19 +198,24 @@ export default function FloatingReviewsSection() {
               }`}
             >
               <div>
-                {/* Card Top: 5 Vector Stars & Quote Icon */}
+                {/* Card Top: Typographic Rating & Commission Tag */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex items-center gap-1">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className="w-4 h-4 fill-amber-400 stroke-amber-400" />
-                    ))}
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-mono tracking-widest text-amber-500 font-bold uppercase">
+                      5.0 / 5.0
+                    </span>
+                    <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">
+                      VERIFIED
+                    </span>
                   </div>
 
-                  <Quote
-                    className={`w-5 h-5 transition-colors ${
-                      isDark ? "text-zinc-600 group-hover:text-amber-400/80" : "text-zinc-300 group-hover:text-amber-500/80"
+                  <span
+                    className={`font-mono text-xs tracking-widest uppercase transition-colors ${
+                      isDark ? "text-zinc-600 group-hover:text-amber-400/80" : "text-zinc-400 group-hover:text-amber-500/80"
                     }`}
-                  />
+                  >
+                    COMMISSION
+                  </span>
                 </div>
 
                 {/* Review Text */}
@@ -236,7 +240,7 @@ export default function FloatingReviewsSection() {
                       >
                         {rev.author}
                       </h4>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
                     </div>
                     <p className={`text-xs transition-colors ${isDark ? "text-zinc-400" : "text-zinc-500"}`}>
                       {rev.role} • {rev.firm}

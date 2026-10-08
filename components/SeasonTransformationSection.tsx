@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Flame, Snowflake, Sun, CloudSnow, ArrowLeftRight } from "lucide-react";
+import { ArrowLeftRight } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function SeasonTransformationSection() {
@@ -89,7 +89,7 @@ export default function SeasonTransformationSection() {
           >
             <button
               onClick={() => setSliderPos(20)}
-              className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos < 35
                   ? "bg-amber-600 text-white font-bold shadow-md shadow-amber-600/20"
                   : isDark
@@ -97,12 +97,11 @@ export default function SeasonTransformationSection() {
                   : "text-zinc-600 hover:text-[#141518]"
               }`}
             >
-              <Flame className="w-3.5 h-3.5" />
               <span>Winter (-4°F)</span>
             </button>
             <button
               onClick={() => setSliderPos(50)}
-              className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos >= 35 && sliderPos <= 65
                   ? isDark
                     ? "bg-white text-black font-bold shadow-md"
@@ -112,12 +111,11 @@ export default function SeasonTransformationSection() {
                   : "text-zinc-600 hover:text-[#141518]"
               }`}
             >
-              <ArrowLeftRight className="w-3.5 h-3.5" />
               <span>50/50 Split</span>
             </button>
             <button
               onClick={() => setSliderPos(80)}
-              className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-lg text-[11px] sm:text-xs font-mono uppercase transition-all cursor-pointer ${
                 sliderPos > 65
                   ? "bg-sky-600 text-white font-bold shadow-md shadow-sky-600/20"
                   : isDark
@@ -125,7 +123,6 @@ export default function SeasonTransformationSection() {
                   : "text-zinc-600 hover:text-[#141518]"
               }`}
             >
-              <Snowflake className="w-3.5 h-3.5" />
               <span>Summer (+89°F)</span>
             </button>
           </div>
@@ -190,9 +187,8 @@ export default function SeasonTransformationSection() {
           <div className="block sm:hidden pointer-events-none absolute bottom-3 inset-x-3 z-20 p-3 rounded-xl bg-black/85 border border-white/15 backdrop-blur-md text-left">
             {sliderPos < 50 ? (
               <div>
-                <div className="flex items-center gap-1.5 text-orange-400 text-[11px] font-mono font-bold uppercase mb-0.5">
-                  <CloudSnow className="w-3.5 h-3.5" />
-                  <span>Winter Mode (-4°F)</span>
+                <div className="text-amber-400 text-[11px] font-mono font-bold uppercase mb-0.5">
+                  Winter Mode (-4°F)
                 </div>
                 <p className="text-[11px] text-zinc-300 leading-snug line-clamp-2">
                   Sub-zero heat pumps and radiant hydronic floor loops maintain steady 72°F interior warmth.
@@ -200,9 +196,8 @@ export default function SeasonTransformationSection() {
               </div>
             ) : (
               <div>
-                <div className="flex items-center gap-1.5 text-sky-400 text-[11px] font-mono font-bold uppercase mb-0.5">
-                  <Sun className="w-3.5 h-3.5" />
-                  <span>Summer Mode (+89°F)</span>
+                <div className="text-sky-400 text-[11px] font-mono font-bold uppercase mb-0.5">
+                  Summer Mode (+89°F)
                 </div>
                 <p className="text-[11px] text-zinc-300 leading-snug line-clamp-2">
                   Concealed laminar ceiling diffusers blanket living volumes in whisper-quiet cooling.
@@ -212,10 +207,9 @@ export default function SeasonTransformationSection() {
           </div>
 
           {/* Desktop Left Label Overlay (Winter State) */}
-          <div className="hidden sm:block pointer-events-none absolute bottom-6 left-6 z-20 p-4 rounded-xl bg-black/80 border border-orange-500/30 backdrop-blur-md max-w-xs">
-            <div className="flex items-center gap-2 text-orange-400 text-xs font-mono font-bold uppercase mb-1">
-              <CloudSnow className="w-4 h-4" />
-              <span>Winter Mode (-4°F)</span>
+          <div className="hidden sm:block pointer-events-none absolute bottom-6 left-6 z-20 p-4 rounded-xl bg-black/80 border border-amber-500/30 backdrop-blur-md max-w-xs">
+            <div className="text-amber-400 text-xs font-mono font-bold uppercase mb-1">
+              Winter Mode (-4°F)
             </div>
             <p className="text-xs text-zinc-300">
               Outdoor heat pump extracts thermal calories from sub-zero air. Glowing in-slab hydronic coils and upstairs warm air registers keep the interior at a rock-solid 72°F.
@@ -224,9 +218,8 @@ export default function SeasonTransformationSection() {
 
           {/* Desktop Right Label Overlay (Summer State) */}
           <div className="hidden sm:block pointer-events-none absolute bottom-6 right-6 z-20 p-4 rounded-xl bg-black/80 border border-sky-500/30 backdrop-blur-md max-w-xs text-right">
-            <div className="flex items-center justify-end gap-2 text-sky-400 text-xs font-mono font-bold uppercase mb-1">
-              <span>Summer Mode (+89°F)</span>
-              <Sun className="w-4 h-4" />
+            <div className="text-sky-400 text-xs font-mono font-bold uppercase mb-1">
+              Summer Mode (+89°F)
             </div>
             <p className="text-xs text-zinc-300">
               High-induction cool air diffusers blanket the living and kitchen areas. Whisper-quiet dehumidification removes moisture while conserving 40% more energy.

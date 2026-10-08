@@ -5,12 +5,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  Layers,
-  Cpu,
-  Wind,
-  Flame,
-  Snowflake,
-  ShieldCheck,
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
@@ -26,7 +20,6 @@ interface SpatialCardData {
   image: string;
   color: string;
   glowColor: string;
-  icon: React.ElementType;
   stats: { label: string; value: string }[];
 }
 
@@ -42,7 +35,6 @@ const CARDS: SpatialCardData[] = [
     image: "/introduction/card_01_villa.jpg",
     color: "from-amber-500/25 via-amber-600/10 to-transparent",
     glowColor: "rgba(217, 119, 6, 0.35)",
-    icon: Layers,
     stats: [
       { label: "AIR CHANNELS", value: "Dual Insulated" },
       { label: "TEMPERATURE BIAS", value: "±0.2°F Precision" },
@@ -59,7 +51,6 @@ const CARDS: SpatialCardData[] = [
     image: "/introduction/card_02_acoustic.jpg",
     color: "from-sky-500/25 via-sky-600/10 to-transparent",
     glowColor: "rgba(14, 165, 233, 0.35)",
-    icon: Wind,
     stats: [
       { label: "SOUND PROFILE", value: "18 dBA Whisper" },
       { label: "DECIBEL CUT", value: "-14 dBA Reduction" },
@@ -76,7 +67,6 @@ const CARDS: SpatialCardData[] = [
     image: "/introduction/card_03_machine.jpg",
     color: "from-sky-500/25 via-sky-600/10 to-transparent",
     glowColor: "rgba(14, 165, 233, 0.35)",
-    icon: Cpu,
     stats: [
       { label: "EFFICIENCY", value: "22.5 SEER2" },
       { label: "TURNDOWN RATIO", value: "10% - 100%" },
@@ -93,7 +83,6 @@ const CARDS: SpatialCardData[] = [
     image: "/introduction/card_04_radiant.jpg",
     color: "from-amber-500/25 via-amber-600/10 to-transparent",
     glowColor: "rgba(217, 119, 6, 0.35)",
-    icon: Flame,
     stats: [
       { label: "LOOP NETWORK", value: "12 Radiant Zones" },
       { label: "SLAB TEMPERATURE", value: "74°F Continuous" },
@@ -110,7 +99,6 @@ const CARDS: SpatialCardData[] = [
     image: "/introduction/card_05_airflow.jpg",
     color: "from-sky-500/25 via-sky-600/10 to-transparent",
     glowColor: "rgba(14, 165, 233, 0.35)",
-    icon: Snowflake,
     stats: [
       { label: "CFM DELIVERY", value: "1,250 CFM" },
       { label: "AIR PURITY", value: "MERV 16 Bio-Grade" },
@@ -127,7 +115,6 @@ const CARDS: SpatialCardData[] = [
     image: "/introduction/card_06_equilibrium.jpg",
     color: "from-amber-500/25 via-amber-600/10 to-transparent",
     glowColor: "rgba(217, 119, 6, 0.35)",
-    icon: ShieldCheck,
     stats: [
       { label: "YEAR-ROUND", value: "72°F Fixed" },
       { label: "RESPONSE TIME", value: "< 90 Seconds" },
@@ -337,8 +324,6 @@ export default function IntroductionSection() {
           }}
         >
           {CARDS.map((card, i) => {
-            const Icon = card.icon;
-
             // Continuous difference from scroll position: creates butter-smooth 3D gliding
             const diff = i - continuousIndex;
             const isVisible = Math.abs(diff) <= 2.2;
@@ -429,8 +414,7 @@ export default function IntroductionSection() {
                 <div className="relative z-20 h-full p-4 sm:p-7 md:p-9 flex flex-col justify-between">
                   {/* Card Top Header */}
                   <div className="flex items-center justify-between">
-                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-black/75 border border-white/20 text-[9px] sm:text-xs font-mono uppercase tracking-widest text-amber-300 font-bold backdrop-blur-md shadow-md">
-                      <Icon className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-400" />
+                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-black/75 border border-white/20 text-[9px] sm:text-xs font-mono uppercase tracking-widest text-amber-300 font-bold backdrop-blur-md shadow-md">
                       <span>{card.badge}</span>
                     </div>
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, PhoneCall } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function CtaSection() {
@@ -79,7 +79,9 @@ export default function CtaSection() {
                 isDark ? "bg-[#252528] border-emerald-500/30 text-white" : "bg-white border-emerald-500/30 text-[#141518]"
               }`}
             >
-              <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto mb-2" />
+              <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-3 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                OK
+              </div>
               <h3 className="text-base font-bold">Consultation Request Received</h3>
               <p className={`text-xs mt-1 ${isDark ? "text-zinc-400" : "text-zinc-500"}`}>
                 Our engineering team will review your plans and respond within 24 hours.
@@ -125,7 +127,6 @@ export default function CtaSection() {
               href="tel:+18005550199"
               className="inline-flex items-center gap-2 hover:text-[#141518] dark:hover:text-white transition-colors font-mono"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
               <span>Talk to an Engineer: (800) 555-0199</span>
             </a>
           </div>
